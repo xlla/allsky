@@ -1,5 +1,6 @@
-platform = armv7
+platform = $(arch)
 
+CC = g++
 #INCLIB = /usr/local/include
 #LDLIB = /usr/local/lib
 OPENCV = $(shell pkg-config --cflags opencv) $(shell pkg-config --libs opencv)
@@ -20,6 +21,16 @@ ifeq ($(platform), armv7)
 CC = arm-linux-gnueabihf-g++
 AR= arm-linux-gnueabihf-ar
 CFLAGS += -march=armv7 -mthumb
+endif
+
+ifeq ($(platform), x86)
+CFLAGS += -m32
+CFLAGS += -lrt
+endif
+
+ifeq ($(platform), x64)
+CFLAGS += -m64
+CFLAGS += -lrt
 endif
 
 all:capture

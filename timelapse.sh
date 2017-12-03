@@ -1,5 +1,5 @@
 #!/bin/bash
-source /home/pi/allsky/config.sh
+source config.sh
 
 if [ "$UPLOAD_VIDEO" = true ] ; then
 	# find images, rename images sequentially and start avconv to build mp4; upload mp4 and move current dir

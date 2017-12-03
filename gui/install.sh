@@ -1,7 +1,15 @@
 #!/bin/bash
+
+# Find current directory
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m' # No Color
+
+# Enter current directory
+cd $DIR
+
 echo -en '\n'
 echo -e "${RED}****************************************************************"
 echo    "*** Welcome to the Allsky Administration Portal installation ***"
@@ -18,17 +26,17 @@ lighty-enable-mod fastcgi-php
 service lighttpd restart
 echo -en '\n'
 echo -e "${GREEN}* Configuring lighttpd${NC}"
-cp /home/pi/allsky/gui/lighttpd.conf /etc/lighttpd/lighttpd.conf
+cp lighttpd.conf /etc/lighttpd/lighttpd.conf
 echo -en '\n'
 echo -e "${GREEN}* Changing hostname to allsky${NC}"
 echo "allsky" > /etc/hostname
 sed -i 's/raspberrypi/allsky/g' /etc/hosts
 echo -en '\n'
 echo -e "${GREEN}* Setting avahi-daemon configuration${NC}"
-cp /home/pi/allsky/gui/avahi-daemon.conf /etc/avahi/avahi-daemon.conf
+cp avahi-daemon.conf /etc/avahi/avahi-daemon.conf
 echo -en '\n'
 echo -e "${GREEN}* Adding the right permissions to the web server${NC}"
-cat /home/pi/allsky/gui/sudoers >> /etc/sudoers
+cat sudoers >> /etc/sudoers
 echo -en '\n'
 echo -e "${GREEN}* Retrieving github files to build admin portal${NC}"
 rm -rf /var/www/html
@@ -40,8 +48,8 @@ chown -R www-data:www-data /etc/raspap
 usermod -a -G www-data pi
 echo -en '\n'
 echo -e "${GREEN}* Modify config.sh${NC}"
-printf "CAMERA_SETTINGS='/var/www/html/settings.json'\n" >> /home/pi/allsky/config.sh
-cp /home/pi/allsky/settings.json /var/www/html/settings.json
+printf "CAMERA_SETTINGS='/var/www/html/settings.json'\n" >> config.sh
+cp ../settings.json /var/www/html/settings.json
 chown www-data:www-data /var/www/html/settings.json
 echo -en '\n'
 echo -en '\n'
