@@ -17,7 +17,7 @@ echo    "*** Welcome to the Allsky Camera installer ***"
 echo -e "**********************************************${NC}"
 echo -en '\n'
 echo -en "${GREEN}* Sunwait installation"
-cp sunwait /usr/local/bin
+cp sunwait/$arch/sunwait /usr/local/bin
 echo -en '\n'
 echo -en "${GREEN}* Dependencies installation${NC}\n"
 apt-get update && apt-get install libopencv-dev libusb-dev libav-tools gawk lftp entr xterm jq cpulimit imagemagick -y
