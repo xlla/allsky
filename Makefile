@@ -23,7 +23,7 @@ CFLAGS += -march=armv7 -mthumb
 endif
 
 
-all:capture startrails keogram sunwait-remove-precompiled sunwait
+all:capture_RPiHQ startrails keogram sunwait-remove-precompiled sunwait finish
 
 sunwait-remove-precompiled:
 ifneq ("arm", $(findstring $(platform), "arm"))
@@ -36,8 +36,8 @@ sunwait:
 		$(MAKE) -C sunwait-src
 		cp sunwait-src/sunwait .
 
-capture:capture.cpp
-	$(CC)  capture.cpp lib/$(platform)/libASICamera2.a -o capture $(CFLAGS) $(OPENCV) -lusb-1.0
+capture_RPiHQ:capture_RPiHQ.cpp
+	$(CC)  capture_RPiHQ.cpp lib/$(platform)/libASICamera2.a -o capture $(CFLAGS) $(OPENCV) -lusb-1.0
 
 startrails:startrails.cpp
 	$(CC)  startrails.cpp -o startrails $(CFLAGS) $(OPENCV)
@@ -46,7 +46,9 @@ keogram:keogram.cpp
 	$(CC)  keogram.cpp -o keogram $(CFLAGS) $(OPENCV)
 
 clean:
-	rm -f capture startrails keogram
+	rm -f capture_RPiHQ startrails keogram
 #pkg-config libusb-1.0 --cflags --libs
 #pkg-config opencv --cflags --libs
 
+finish:
+	mv capture capture_RPiHQ
