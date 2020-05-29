@@ -540,7 +540,7 @@ int main(int argc, char *argv[])
 				daytimeDelay = atoi(argv[i + 1]);
 				i++;
 			}
-			else if (strcmp(argv[i], "-autoawb") == 0)
+			else if (strcmp(argv[i], "-awb") == 0)
 			{
 				asiAutoAWB = atoi(argv[i + 1]);
 				i++;
