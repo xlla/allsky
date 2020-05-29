@@ -140,7 +140,8 @@ void RPiHQcapture(int asiAutoExposure, int asiExposure, int asiAutoGain, int asi
 	const struct std::tm *tm_ptr;
 	std::time_t now;
 
-	now = std::time ( NULL );
+	now = std::
+time ( NULL );
 	tm_ptr = std::localtime ( &now );
 
 	std::strftime ( time_buffer, 40, "%d %B %Y %I:%M:%S %p", tm_ptr );
@@ -383,7 +384,7 @@ void RPiHQcapture(int asiAutoExposure, int asiExposure, int asiAutoGain, int asi
 	// Convert command to character variable
 	strcpy(cmd, command.c_str());
 
-	// printf("Command: %s\n", cmd);
+	printf("Command: %s\n", cmd);
 
 	// Execute raspistill command
 	system(cmd);
@@ -433,7 +434,7 @@ int main(int argc, char *argv[])
 	char const *longitude = "4.70E";
 	char const *angle  	  = "0"; // angle of the sun with the horizon (0=sunset, -6=civil twilight, -12=nautical twilight, -18=astronomical twilight)
 	int preview           = 0;
-	int time              = 1;
+	// int time              = 1;
 	// int darkframe         = 0;
 	int daytimeCapture    = 0;
 	int help              = 0;
@@ -507,7 +508,7 @@ int main(int argc, char *argv[])
 			}
 			else if (strcmp(argv[i], "-gain") == 0)
 			{
-				asiGain = atoi(argv[i + 1]);
+				asiGain = atof(argv[i + 1]);
 				i++;
 			}
 			else if (strcmp(argv[i], "-autogain") == 0)
@@ -547,12 +548,12 @@ int main(int argc, char *argv[])
 			}
 			else if (strcmp(argv[i], "-wbr") == 0)
 			{
-				asiAutoAWB = atoi(argv[i + 1]);
+				asiWBR = atof(argv[i + 1]);
 				i++;
 			}
 			else if (strcmp(argv[i], "-wbb") == 0)
 			{
-				asiWBB = atoi(argv[i + 1]);
+				asiWBB = atof(argv[i + 1]);
 				i++;
 			}
 /*
@@ -647,12 +648,12 @@ int main(int argc, char *argv[])
 				preview = atoi(argv[i + 1]);
 				i++;
 			}
+/*
 			else if (strcmp(argv[i], "-time") == 0)
 			{
 				time = atoi(argv[i + 1]);
 				i++;
 			}
-/*
 			else if (strcmp(argv[i], "-darkframe") == 0)
 			{
 				darkframe = atoi(argv[i + 1]);
@@ -783,7 +784,7 @@ int main(int argc, char *argv[])
 	printf(" Longitude: %s\n", longitude);
 	printf(" Sun Elevation: %s\n", angle);
 	printf(" Preview: %d\n", preview);
-	printf(" Time: %d\n", time);
+	// printf(" Time: %d\n", time);
 	// printf(" Darkframe: %d\n", darkframe);
 
 	// Show selected camera type
@@ -819,7 +820,7 @@ int main(int argc, char *argv[])
 			}
 
 // Next line is present for testing purposes
-daytimeCapture = 1;
+// daytimeCapture = 1;
 
 			if (daytimeCapture != 1)
 			{
