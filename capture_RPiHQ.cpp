@@ -115,7 +115,7 @@ void writeToLog(int val)
 	outfile << "\n";
 }
 
-void RPiHQcapture(int asiAutoExposure, int asiExposure, int asiAutoGain, double asiGain, int bin, double asiWBR, double asiWBB, int asiFlip, int asiGamma, int asiBrightness, int quality, const char* fileName)
+void RPiHQcapture(int asiAutoExposure, int asiExposure, int asiAutoGain, int asiAutoAWB, double asiGain, int bin, double asiWBR, double asiWBB, int asiFlip, int asiGamma, int asiBrightness, int quality, const char* fileName)
 {
 	//printf ("capturing image in file %s\n", fileName);
 
@@ -252,7 +252,7 @@ void RPiHQcapture(int asiAutoExposure, int asiExposure, int asiAutoGain, double 
 	string awb;
 
 	// Check if R and B component are given
-	if (asiWBR && asiWBB) {
+	if (!asiAutoGain) {
 		if (asiWBR < 0.1)
 		{
 			asiWBR = 0.1;
@@ -295,12 +295,12 @@ void RPiHQcapture(int asiAutoExposure, int asiExposure, int asiAutoGain, double 
 	string flip = "";
 
 	// Check if flip is selected
-	if (asiFlip & 1)
+	if (asiFlip == 1 || asiFlip == 3)
 	{
 		// Set horizontal flip
 		flip += "--hflip ";
 	}
-	if (asiFlip & 2)
+	if (asiFlip == 2 || asiFlip == 3)
 	{
 		// Set vertical flip
 		flip += "--vflip ";
@@ -419,8 +419,9 @@ int main(int argc, char *argv[])
 	int bin               = 2;
 	int asiExposure       = 30000000;
 	int asiAutoExposure   = 0;
-	double asiGain           = 1;
+	double asiGain        = 1;
 	int asiAutoGain       = 0;
+	int asiAutoAWB        = 0;
 	int delay             = 10;   // Delay in milliseconds. Default is 10ms
 	int daytimeDelay      = 5000; // Delay in milliseconds. Default is 5000ms
 	double asiWBR         = 2;
@@ -539,9 +540,14 @@ int main(int argc, char *argv[])
 				daytimeDelay = atoi(argv[i + 1]);
 				i++;
 			}
+			else if (strcmp(argv[i], "-autoawb") == 0)
+			{
+				asiAutoAWB = atoi(argv[i + 1]);
+				i++;
+			}
 			else if (strcmp(argv[i], "-wbr") == 0)
 			{
-				asiWBR = atoi(argv[i + 1]);
+				asiAutoAWB = atoi(argv[i + 1]);
 				i++;
 			}
 			else if (strcmp(argv[i], "-wbb") == 0)
@@ -754,6 +760,7 @@ int main(int argc, char *argv[])
 	printf(" Auto Gain: %d\n", asiAutoGain);
 	printf(" Brightness: %d\n", asiBrightness);
 	printf(" Gamma: %d\n", asiGamma);
+	printf(" Auto White Balance: %d\n", asiAutoAWB);
 	printf(" WB Red: %1.2f\n", asiWBR);
 	printf(" WB Blue: %1.2f\n", asiWBB);
 	printf(" Binning: %d\n", bin);
@@ -847,7 +854,7 @@ daytimeCapture = 1;
 			{
 				printf("Saving...\n");
 
-				RPiHQcapture(asiAutoExposure, currentExposure, asiAutoGain, asiGain, bin, asiWBR, asiWBB, asiFlip, asiGamma, asiBrightness, quality, fileName);
+				RPiHQcapture(asiAutoExposure, currentExposure, asiAutoGain, asiAutoAWB, asiGain, bin, asiWBR, asiWBB, asiFlip, asiGamma, asiBrightness, quality, fileName);
 
 				if (!bSavingImg)
 				{
