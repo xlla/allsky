@@ -2,6 +2,8 @@
 
 echo Starting AllSky for Raspberry Pi HQ camera...
 
+ps -ef | grep allsky_RPiHQ.sh | grep -v $$ | xargs "sudo kill -9" 2>/dev/null
+
 source /home/pi/allsky/config.sh
 source /home/pi/allsky/scripts/filename.sh
 

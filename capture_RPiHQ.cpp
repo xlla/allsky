@@ -1,20 +1,19 @@
 #include <opencv2/core/core.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
-#include "include/ASICamera2.h"
-#include <sys/time.h>
-#include <time.h>
+//#include <sys/time.h>
+//#include <time.h>
 #include <unistd.h>
 #include <string.h>
-#include <sys/types.h>
+//#include <sys/types.h>
 #include <errno.h>
 #include <string>
 #include <cstring>
 #include <sstream>
-#include <iostream>
-#include <cstdio>
+//include <iostream>
+//#include <cstdio>
 #include <tr1/memory>
-#include <ctime>
+//#include <ctime>
 #include <stdlib.h>
 #include <signal.h>
 #include <fstream>
@@ -33,9 +32,10 @@ using namespace std;
 //-------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------
 
-char nameCnt[128];
+//char nameCnt[128];
 char const *fileName = "image.jpg";
-bool bMain = true, bDisplay = false;
+bool bMain = true;
+//ol bDisplay = false;
 std::string dayOrNight;
 
 bool bSavingImg = false;
@@ -103,7 +103,9 @@ void calculateDayOrNight(const char *latitude, const char *longitude, const char
 {
 	char sunwaitCommand[128];
 	sprintf(sunwaitCommand, "sunwait poll exit set angle %s %s %s", angle, latitude, longitude);
+	//printf(sunwaitCommand, "sunwait poll exit set angle %s %s %s\n", angle, latitude, longitude);
 	dayOrNight = exec(sunwaitCommand);
+
 	dayOrNight.erase(std::remove(dayOrNight.begin(), dayOrNight.end(), '\n'), dayOrNight.end());
 }
 
@@ -384,7 +386,7 @@ time ( NULL );
 	// Convert command to character variable
 	strcpy(cmd, command.c_str());
 
-	printf("Command: %s\n", cmd);
+	// printf("Command: %s\n", cmd);
 
 	// Execute raspistill command
 	system(cmd);
@@ -418,14 +420,14 @@ int main(int argc, char *argv[])
 	int width             = 0;
 	int height            = 0;
 	int bin               = 2;
-	int asiExposure       = 30000000;
+	int asiExposure       = 60000000;
 	int asiAutoExposure   = 0;
-	double asiGain        = 1;
+	double asiGain        = 4;
 	int asiAutoGain       = 0;
 	int asiAutoAWB        = 0;
 	int delay             = 10;   // Delay in milliseconds. Default is 10ms
 	int daytimeDelay      = 5000; // Delay in milliseconds. Default is 5000ms
-	double asiWBR         = 2;
+	double asiWBR         = 2.5;
 	double asiWBB         = 2;
 	int asiGamma          = 50;
 	int asiBrightness     = 50;
@@ -433,12 +435,12 @@ int main(int argc, char *argv[])
 	char const *latitude  = "52.57N"; //GPS Coordinates of Limmen, Netherlands where this code was altered
 	char const *longitude = "4.70E";
 	char const *angle  	  = "0"; // angle of the sun with the horizon (0=sunset, -6=civil twilight, -12=nautical twilight, -18=astronomical twilight)
-	int preview           = 0;
+	//int preview           = 0;
 	// int time              = 1;
 	// int darkframe         = 0;
 	int daytimeCapture    = 0;
 	int help              = 0;
-	int quality           = 70;
+	int quality           = 90;
 
 	int i;
 	//id *retval;
@@ -643,12 +645,12 @@ int main(int argc, char *argv[])
 				angle = argv[i + 1];
 				i++;
 			}
+/*
 			else if (strcmp(argv[i], "-preview") == 0)
 			{
 				preview = atoi(argv[i + 1]);
 				i++;
 			}
-/*
 			else if (strcmp(argv[i], "-time") == 0)
 			{
 				time = atoi(argv[i + 1]);
@@ -668,6 +670,9 @@ int main(int argc, char *argv[])
 		}
 	}
 
+	// Save the status of Auto Gain for night exposure
+	int oldAutoExposure = asiAutoExposure;
+
 	if (help == 1)
 	{
 		printf("%sAvailable Arguments: \n", KYEL);
@@ -679,14 +684,12 @@ int main(int argc, char *argv[])
 		printf(" -autogain                          - Default = 0 - Set to 1 to enable auto Gain \n");
 		printf(" -gamma                             - Default = 50 (-100 till 100)\n");
 		printf(" -brightness                        - Default = 50 (0 till 100) \n");
+		printf(" -awb                               - Default = 0 - Auto White Balance (0 = off)\n");
 		printf(" -wbr                               - Default = 2 - White Balance Red  (0 = off)\n");
 		printf(" -wbb                               - Default = 2 - White Balance Blue (0 = off)\n");
-		printf(" -bin                               - Default = 1 - 1 = binning OFF (1x1), 2 = 2x2, 3 = 3x3 "
-			   "binning\n");
-		printf(" -delay                             - Default = 10 - Delay between images in milliseconds - 1000 = 1 "
-			   "sec.\n");
-		printf(" -daytimeDelay                      - Default = 5000 - Delay between images in milliseconds - 5000 = "
-			   "5 sec.\n");
+		printf(" -bin                               - Default = 1 - binning OFF (1x1), 2 = 2x2, 3 = 3x3 binning\n");
+		printf(" -delay                             - Default = 10 - Delay between images in milliseconds - 1000 = 1 sec.\n");
+		printf(" -daytimeDelay                      - Default = 5000 - Delay between images in milliseconds - 5000 = 5 sec.\n");
 		printf(" -type = Image Type                 - Default = 0 - 0 = RAW8,  1 = RGB24,  2 = RAW16 \n");
 		printf(" -quality                           - Default = 70%%, 0%% (poor) 100%% (perfect)\n");
 		printf(" -filename                          - Default = image.jpg\n");
@@ -715,34 +718,28 @@ int main(int argc, char *argv[])
 		printf(" -angle                             - Default = -6 - Angle of the sun below the horizon. -6=civil "
 			   "twilight, -12=nautical twilight, -18=astronomical twilight\n");
 		printf("\n");
-		printf(" -preview                           - set to 1 to preview the captured images. Only works with a "
-			   "Desktop Environment \n");
-		//printf(" -time                              - Adds the time to the image. Combine with Text X and Text Y for "
-		//	   "placement \n");
-//		printf(" -darkframe                         - Set to 1 to disable time and text overlay \n");
+		// printf(" -preview                           - set to 1 to preview the captured images. Only works with a Desktop Environment \n");
+		// printf(" -time                              - Adds the time to the image. Combine with Text X and Text Y for placement \n");
+		// printf(" -darkframe                         - Set to 1 to disable time and text overlay \n");
 
 		printf("%sUsage:\n", KRED);
-		printf(" ./capture -width 640 -height 480 -exposure 5000000 -gamma 50 -bin 1 -filename Lake-Laberge.PNG\n\n");
+		printf(" ./capture -width 640 -height 480 -exposure 5000000 -gamma 50 -bin 1 -filename Lake-Laberge.JPG\n\n");
 	}
+
 	printf("%s", KNRM);
 
-	int iMaxWidth, iMaxHeight;
-	double pixelSize;
-
-	pixelSize = 1.55;
-	iMaxWidth = 4096;
-	iMaxHeight = 3040;
+	int iMaxWidth = 4096;
+	int iMaxHeight = 3040;
+	double pixelSize = 1.55;
 
 	printf("- Resolution: %dx%d\n", iMaxWidth, iMaxHeight);
 	printf("- Pixel Size: %1.2fμm\n", pixelSize);
 	printf("- Supported Bin: 1x, 2x and 3x\n");
 
-	width  = iMaxWidth;
-	height = iMaxHeight;
-
 	// Adjusting variables for chosen binning
-	height    = height / bin;
-	width     = width / bin;
+	width  = iMaxWidth / bin;
+	height = iMaxHeight / bin;
+
 	//iTextX    = iTextX / bin;
 	//iTextY    = iTextY / bin;
 	//fontsize  = fontsize / bin;
@@ -783,7 +780,7 @@ int main(int argc, char *argv[])
 	printf(" Latitude: %s\n", latitude);
 	printf(" Longitude: %s\n", longitude);
 	printf(" Sun Elevation: %s\n", angle);
-	printf(" Preview: %d\n", preview);
+	// printf(" Preview: %d\n", preview);
 	// printf(" Time: %d\n", time);
 	// printf(" Darkframe: %d\n", darkframe);
 
@@ -810,8 +807,24 @@ int main(int argc, char *argv[])
 
 		lastDayOrNight = dayOrNight;
 		printf("\n");
+
+// Next line is present for testing purposes
+// printf("Daytimecapture: %d\n", daytimeCapture);
+if (dayOrNight=="DAY")
+	printf("Check for day or night: DAY\n");
+else if (dayOrNight=="NIGHT")
+	printf("Check for day or night: NIGHT\n");
+else
+	printf("Nor day or night...\n");
+
 		if (dayOrNight == "DAY")
 		{
+			// Preserve auto gain setting
+			oldAutoExposure = asiAutoExposure;
+
+			// Switch auto gain on
+			asiAutoExposure = 1;
+
 			// Setup the daytime capture parameters
 			if (endOfNight == true)
 			{
@@ -841,19 +854,21 @@ int main(int argc, char *argv[])
 		}
 		else if (dayOrNight == "NIGHT")
 		{
+			// Retrieve auto gain setting
+			asiAutoExposure = oldAutoExposure;
 			printf("Saving %ds exposure images every %d ms\n\n", (int)round(currentExposure / 1000000), delay);
 
 			// Set exposure value for night time capture
 			useDelay = delay;
 		}
 
-		printf("Press Ctrl+C to stop\n\n");
+		printf("Press Ctrl+Z to stop\n\n");
 
 		if (needCapture)
 		{
 			while (bMain && lastDayOrNight == dayOrNight)
 			{
-				printf("Saving...\n");
+				printf("Capturing & saving image...\n");
 
 				RPiHQcapture(asiAutoExposure, currentExposure, asiAutoGain, asiAutoAWB, asiGain, bin, asiWBR, asiWBB, asiFlip, asiGamma, asiBrightness, quality, fileName);
 
@@ -873,13 +888,21 @@ int main(int argc, char *argv[])
 					bSavingImg = false;
 				}
 
+				printf("Capturing & saving image done, now wait %d seconds...\n", useDelay / 1000);
+
 				usleep(useDelay * 1000);
-			}
 
-			calculateDayOrNight(latitude, longitude, angle);
+				calculateDayOrNight(latitude, longitude, angle);
 
-// Next line is present for testing purposes
+// Next lines are present for testing purposes
 // dayOrNight.assign("NIGHT");
+if (dayOrNight=="DAY")
+	printf("Check for day or night: DAY\n");
+else if (dayOrNight=="NIGHT")
+	printf("Check for day or night: NIGHT\n");
+else
+	printf("Nor day or night...\n");
+			}
 
 			if (lastDayOrNight == "NIGHT")
 			{

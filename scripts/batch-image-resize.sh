@@ -19,7 +19,7 @@ HEIGHT=1078
 #find ${FOLDER} -iname '*.png' -exec convert \{} -verbose -resize $WIDTHx$HEIGHT\> \{} \;
 
 #resize jpg only to either height or width, keeps proportions using imagemagick
-find ${FOLDER} -maxdepth 1 -iname 'image-*.jpg' -exec convert \{} -verbose -resize $WIDTHx$HEIGHT\> \{} \;
+find ${FOLDER} -maxdepth 1 -iname 'image-*.jpg' -exec nice convert \{} -verbose -resize $WIDTHx$HEIGHT\> \{} \;
 
 # alternative
 #mogrify -path ${FOLDER} -resize ${WIDTH}x${HEIGHT}% *.png -verbose
