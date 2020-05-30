@@ -1,6 +1,29 @@
-# Allsky Camera ![Release 0.6](https://img.shields.io/badge/Release-0.6-green.svg) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MEBU2KN75G2NG&source=url)
+# Allsky Camera ![Release 0.7](https://img.shields.io/badge/Release-0.6-green.svg) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MEBU2KN75G2NG&source=url)
 
+# Instructions for installing the AllSky software for the newly released Raspberry Pi HQ Camera (released on 01-05-2020):
 
+When you have the HQ camera working on your Raspberry Pi (test using raspistill -v -o test.jpg) then download and install the adjusted AllSky software via:
+```shell
+cd ~
+sudo apt-get install git make
+git clone --recursive https://github.com/RobboRob/allsky.git
+cd allsky
+make all
+./install_RPiQH.sh
+```
+Manual starting image capturing can be started via (but it is also possible to automatically start image capturing after a reboot of the Raspberry Pi):
+```shell
+./allsky_RPiHQ.sh
+The web GUI can be installed via:
+gui/install.sh
+```
+Test the GUI software using your favorite browser via http://[Your Raspberry Pi's IP address]
+
+NOTE: Not implemented yet for the RPi HQ camera:
+- dark frame correction
+- text annotations
+
+# General Instructions
 
 This is the source code for the Wireless Allsky Camera project described [on Instructables](http://www.instructables.com/id/Wireless-All-Sky-Camera/).
 
