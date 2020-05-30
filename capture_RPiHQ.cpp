@@ -152,7 +152,7 @@ time ( NULL );
 	ss << fileName;
 
 	// Define strings for raspistill command string and
-	string command = "raspistill --nopreview --thumb none --output " + ss.str() + " --burst -st ";
+	string command = "nice raspistill --nopreview --thumb none --output " + ss.str() + " --burst -st ";
 
 	// Define strings for roi (used for binning) string
 	string roi;
@@ -810,13 +810,14 @@ int main(int argc, char *argv[])
 
 // Next line is present for testing purposes
 // printf("Daytimecapture: %d\n", daytimeCapture);
+/*
 if (dayOrNight=="DAY")
 	printf("Check for day or night: DAY\n");
 else if (dayOrNight=="NIGHT")
 	printf("Check for day or night: NIGHT\n");
 else
 	printf("Nor day or night...\n");
-
+*/
 		if (dayOrNight == "DAY")
 		{
 			// Preserve auto gain setting
@@ -896,12 +897,14 @@ else
 
 // Next lines are present for testing purposes
 // dayOrNight.assign("NIGHT");
+/*
 if (dayOrNight=="DAY")
 	printf("Check for day or night: DAY\n");
 else if (dayOrNight=="NIGHT")
 	printf("Check for day or night: NIGHT\n");
 else
 	printf("Nor day or night...\n");
+*/
 			}
 
 			if (lastDayOrNight == "NIGHT")
