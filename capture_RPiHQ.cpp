@@ -99,24 +99,36 @@ void IntHandle(int i)
 	bMain = false;
 }
 
+// Calculate if it is day or night
 void calculateDayOrNight(const char *latitude, const char *longitude, const char *angle)
 {
 	char sunwaitCommand[128];
+
+	// Log data
 	sprintf(sunwaitCommand, "sunwait poll exit set angle %s %s %s", angle, latitude, longitude);
-	//printf(sunwaitCommand, "sunwait poll exit set angle %s %s %s\n", angle, latitude, longitude);
+
+	// Inform user
+	printf("Determine if it is day or night using variables: desired sun declination angle: %s degrees, latitude: %s, longitude: %s\n", angle, latitude, longitude);
+
+	// Determine if it is day or night
 	dayOrNight = exec(sunwaitCommand);
 
+	// RMu, I have no clue what this does...
 	dayOrNight.erase(std::remove(dayOrNight.begin(), dayOrNight.end(), '\n'), dayOrNight.end());
 }
 
+// write value to log file
 void writeToLog(int val)
 {
 	std::ofstream outfile;
+
+	// Append value to the logfile
 	outfile.open("log.txt", std::ios_base::app);
 	outfile << val;
 	outfile << "\n";
 }
 
+// Build capture command to capture the image from the HQ camera
 void RPiHQcapture(int asiAutoExposure, int asiExposure, int asiAutoGain, int asiAutoAWB, double asiGain, int bin, double asiWBR, double asiWBB, int asiFlip, int asiGamma, int asiBrightness, int quality, const char* fileName)
 {
 	//printf ("capturing image in file %s\n", fileName);
@@ -386,7 +398,7 @@ time ( NULL );
 	// Convert command to character variable
 	strcpy(cmd, command.c_str());
 
-	// printf("Command: %s\n", cmd);
+	printf("Capture command: %s\n", cmd);
 
 	// Execute raspistill command
 	system(cmd);
@@ -426,7 +438,7 @@ int main(int argc, char *argv[])
 	int asiAutoGain       = 0;
 	int asiAutoAWB        = 0;
 	int delay             = 10;   // Delay in milliseconds. Default is 10ms
-	int daytimeDelay      = 5000; // Delay in milliseconds. Default is 5000ms
+	int daytimeDelay      = 15000; // Delay in milliseconds. Default is 15 seconds
 	double asiWBR         = 2.5;
 	double asiWBB         = 2;
 	int asiGamma          = 50;
@@ -793,11 +805,14 @@ int main(int argc, char *argv[])
 	int currentExposure = asiExposure;
 	int exp_ms          = 0;
 	int useDelay        = 0;
+	bool needCapture	= true;
+	std::string lastDayOrNight;
 
 	while (bMain)
 	{
-		bool needCapture = true;
-		std::string lastDayOrNight;
+		printf("\n");
+
+		needCapture = true;
 
 		// Find out if it is currently DAY or NIGHT
 		calculateDayOrNight(latitude, longitude, angle);
@@ -806,18 +821,19 @@ int main(int argc, char *argv[])
 // dayOrNight.assign("NIGHT");
 
 		lastDayOrNight = dayOrNight;
+
+// Next lines are present for testing purposes
+// printf("Daytimecapture: %d\n", daytimeCapture);
+
+		if (dayOrNight=="DAY")
+			printf("Check for day or night: DAY\n");
+		else if (dayOrNight=="NIGHT")
+			printf("Check for day or night: NIGHT\n");
+		else
+			printf("Nor day or night...\n");
+
 		printf("\n");
 
-// Next line is present for testing purposes
-// printf("Daytimecapture: %d\n", daytimeCapture);
-/*
-if (dayOrNight=="DAY")
-	printf("Check for day or night: DAY\n");
-else if (dayOrNight=="NIGHT")
-	printf("Check for day or night: NIGHT\n");
-else
-	printf("Nor day or night...\n");
-*/
 		if (dayOrNight == "DAY")
 		{
 			// Preserve auto gain setting
@@ -826,95 +842,166 @@ else
 			// Switch auto gain on
 			asiAutoExposure = 1;
 
-			// Setup the daytime capture parameters
+			// Execute end of night script
 			if (endOfNight == true)
 			{
 				system("scripts/endOfNight_RPiHQ.sh &");
+
+				// Reset end of night indicator
 				endOfNight = false;
 			}
 
 // Next line is present for testing purposes
 // daytimeCapture = 1;
 
+			// Check if images should not be captured during day-time
 			if (daytimeCapture != 1)
 			{
+				// Indicate no images need capturing
 				needCapture = false;
+
+				// Inform user
 				printf("It's daytime... we're not saving images\n");
+
+				// Sleep for a while
 				usleep(daytimeDelay * 1000);
 			}
+
+			// Images should be captured during day-time
 			else
 			{
+				// Inform user
 				printf("Starting daytime capture\n");
+
+				// Set exposure to 32 ms
 				exp_ms         = 32;
-				printf("Saving %d ms exposed images every %d ms\n\n", exp_ms, daytimeDelay);
+
+				// Inform user
+				printf("Saving %d ms exposed images with %d seconds delays in between...\n\n", exp_ms, daytimeDelay / 1000);
+
+				// Set delay time
 				useDelay       = daytimeDelay;
 
-				// Set ZWO Exposure and Gain settings
+				// Set exposure time
 				currentExposure = exp_ms * 1000;
 			}
 		}
+
+		// Check for night time
 		else if (dayOrNight == "NIGHT")
 		{
 			// Retrieve auto gain setting
 			asiAutoExposure = oldAutoExposure;
-			printf("Saving %ds exposure images every %d ms\n\n", (int)round(currentExposure / 1000000), delay);
+
+			// Inform user
+			printf("Saving %d seconds exposure images with %d ms delays in between...\n\n", (int)round(currentExposure / 1000000), delay);
 
 			// Set exposure value for night time capture
 			useDelay = delay;
 		}
 
-		printf("Press Ctrl+Z to stop\n\n");
+		// Inform user
+		printf("Press Ctrl+C twice quickly to stop capturing images...\n\n");
 
+		// check if images should be captured
 		if (needCapture)
 		{
+			// Wait for switch day time -> night time or night time -> day time
 			while (bMain && lastDayOrNight == dayOrNight)
 			{
+				// Inform user
 				printf("Capturing & saving image...\n");
 
+				// Capture and save image
 				RPiHQcapture(asiAutoExposure, currentExposure, asiAutoGain, asiAutoAWB, asiGain, bin, asiWBR, asiWBB, asiFlip, asiGamma, asiBrightness, quality, fileName);
 
+				// Check if no processing is going on
 				if (!bSavingImg)
 				{
+					// Flag processing is on-going
 					bSavingImg = true;
 
+					// Check for night time
 					if (dayOrNight == "NIGHT")
 					{
+						// Preserve image during night time
 						system("scripts/saveImageNight.sh &");
 					}
 					else
 					{
+						// Upload and resize image when configured
 						system("scripts/saveImageDay.sh &");
 					}
 
+					// Flag processing is over
 					bSavingImg = false;
 				}
 
+				// Inform user
 				printf("Capturing & saving image done, now wait %d seconds...\n", useDelay / 1000);
 
+				// Sleep for a moment
 				usleep(useDelay * 1000);
 
+				// Check for day or night based on location and angle
 				calculateDayOrNight(latitude, longitude, angle);
 
-// Next lines are present for testing purposes
+// Next line is present for testing purposes
 // dayOrNight.assign("NIGHT");
-/*
-if (dayOrNight=="DAY")
-	printf("Check for day or night: DAY\n");
-else if (dayOrNight=="NIGHT")
-	printf("Check for day or night: NIGHT\n");
-else
-	printf("Nor day or night...\n");
-*/
+
+				// Check if it is day time
+				if (dayOrNight=="DAY")
+				{
+					// Check started capturing during day time
+					if (lastDayOrNight=="DAY")
+					{
+						printf("Check for day or night: DAY (waiting for changing DAY into NIGHT)...\n");
+					}
+
+					// Started capturing during night time
+					else
+					{
+						printf("Check for day or night: DAY (waiting for changing NIGHT into DAY)...\n");
+					}
+				}
+
+				// Check if it is night time
+				else if (dayOrNight=="NIGHT")
+				{
+					// Check started capturing during day time
+					if (lastDayOrNight=="DAY")
+					{
+						printf("Check for day or night: NIGHT (waiting for changing DAY into NIGHT)...\n");
+					}
+
+					// Started capturing during night time
+					else
+					{
+						printf("Check for day or night: NIGHT (waiting for changing NIGHT into DAY)...\n");
+					}
+				}
+
+				// Unclear if it is day or night
+				else
+				{
+					printf("Nor day or night...\n");
+				}
+
+				printf("\n");
 			}
 
+			// Check for night situation
 			if (lastDayOrNight == "NIGHT")
 			{
+				// Flag end of night processing is needed
 				endOfNight = true;
 			}
 		}
 	}
 
+	// Stop script
 	printf("main function over\n");
 
+	// Return all is well
 	return 1;
 }
