@@ -15,6 +15,7 @@
    "daytimeDelay": "5000",
    "quality":"95",
    "filename":"image.jpg",
+   "rotation":"0",
    "flip":"0",
    "latitude":"60.7N",
    "longitude":"135.05W",

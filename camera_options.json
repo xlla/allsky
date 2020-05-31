@@ -112,6 +112,13 @@
 "type":"text"
 },
 {
+"name":"rotation",
+"defualt":"0",
+"description":"Set image rotation to enable proper orientation, range 0 - 359 degrees",
+"label":"Orientation",
+"type":"number"
+},
+{
 "name":"flip",
 "default":"0",
 "description":"Select a flipping option if you want to reverse the image along an axis",

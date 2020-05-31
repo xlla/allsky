@@ -129,7 +129,7 @@ void writeToLog(int val)
 }
 
 // Build capture command to capture the image from the HQ camera
-void RPiHQcapture(int asiAutoExposure, int asiExposure, int asiAutoGain, int asiAutoAWB, double asiGain, int bin, double asiWBR, double asiWBB, int asiFlip, int asiGamma, int asiBrightness, int quality, const char* fileName)
+void RPiHQcapture(int asiAutoExposure, int asiExposure, int asiAutoGain, int asiAutoAWB, double asiGain, int bin, double asiWBR, double asiWBB, int asiRotation, int asiFlip, int asiGamma, int asiBrightness, int quality, const char* fileName)
 {
 	//printf ("capturing image in file %s\n", fileName);
 
@@ -290,7 +290,7 @@ time ( NULL );
 
 		ss.str("");
 		ss << asiWBR;
-		awb  = "--awb off --awbgains " + ss.str();
+		awb  = "--awb off --awbgains " + ss.str() + " ";
 
 		ss.str("");
 		ss << asiWBB;
@@ -305,6 +305,26 @@ time ( NULL );
 
 	// Add white balance setting to raspistill command string
 	command += awb;
+
+	// Check if rotation is at least 0 degrees
+	if (asiRotation < 0)
+	{
+		// Set rotation to 0 degrees
+		asiRotation = 0;
+	}
+
+	// check if rotation is at most 359 degrees
+	if (asiRotation > 359)
+	{
+		// Set rotation to 359 degrees
+		asiRotation = 359;
+	}
+
+	ss.str("");
+	ss << asiRotation;
+
+	// Add white balance setting to raspistill command string
+	command += "--rotation "  + ss.str();
 
 	// Flip image
 	string flip = "";
@@ -444,6 +464,7 @@ int main(int argc, char *argv[])
 	int asiGamma          = 50;
 	int asiBrightness     = 50;
 	int asiFlip           = 0;
+	int asiRotation       = 0;
 	char const *latitude  = "52.57N"; //GPS Coordinates of Limmen, Netherlands where this code was altered
 	char const *longitude = "4.70E";
 	char const *angle  	  = "0"; // angle of the sun with the horizon (0=sunset, -6=civil twilight, -12=nautical twilight, -18=astronomical twilight)
@@ -481,8 +502,12 @@ int main(int argc, char *argv[])
 
 	if (argc > 0)
 	{
+		// printf("Found %d parameters...\n", argc - 1);
+
 		for (i = 0; i < argc - 1; i++)
 		{
+			// printf("Processing argument: %s\n\n", argv[i]);
+
 			if (strcmp(argv[i], "-h") == 0 || strcmp(argv[i], "-help") == 0)
 			{
 				help = atoi(argv[i + 1]);
@@ -632,6 +657,11 @@ int main(int argc, char *argv[])
 				i++;
 			}
 */
+			else if (strcmp(argv[i], "-rotation") == 0)
+			{
+				asiRotation = atoi(argv[i + 1]);
+				i++;
+			}
 			else if (strcmp(argv[i], "-flip") == 0)
 			{
 				asiFlip = atoi(argv[i + 1]);
@@ -705,6 +735,7 @@ int main(int argc, char *argv[])
 		printf(" -type = Image Type                 - Default = 0 - 0 = RAW8,  1 = RGB24,  2 = RAW16 \n");
 		printf(" -quality                           - Default = 70%%, 0%% (poor) 100%% (perfect)\n");
 		printf(" -filename                          - Default = image.jpg\n");
+		printf(" -rotation                          - Default = 0 degrees - Range 0 till 359 degrees\n");
 		printf(" -flip                              - Default = 0 - 0 = Orig, 1 = Horiz, 2 = Verti, 3 = Both\n");
 		printf("\n");
 /*
@@ -787,6 +818,7 @@ int main(int argc, char *argv[])
 		printf(" Font Line: %d\n", linewidth);
 		printf(" Outline Font : %d\n", outlinefont);
 */
+	printf(" Rotation: %d\n", asiRotation);
 	printf(" Flip Image: %d\n", asiFlip);
 	printf(" Filename: %s\n", fileName);
 	printf(" Latitude: %s\n", latitude);
@@ -913,7 +945,7 @@ int main(int argc, char *argv[])
 				printf("Capturing & saving image...\n");
 
 				// Capture and save image
-				RPiHQcapture(asiAutoExposure, currentExposure, asiAutoGain, asiAutoAWB, asiGain, bin, asiWBR, asiWBB, asiFlip, asiGamma, asiBrightness, quality, fileName);
+				RPiHQcapture(asiAutoExposure, currentExposure, asiAutoGain, asiAutoAWB, asiGain, bin, asiWBR, asiWBB, asiRotation, asiFlip, asiGamma, asiBrightness, quality, fileName);
 
 				// Check if no processing is going on
 				if (!bSavingImg)
