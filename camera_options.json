@@ -157,13 +157,6 @@
 "description":"Altitude of the sun in degrees relative to the horizon at which to start/stop capture",
 "label":"Angle",
 "type":"text"
-},
-{
-"name":"darkframe",
-"default":"0",
-"description":"Activate to capture a dark frame. This mode hides text and time overlays",
-"label":"Dark Frame",
-"type":"checkbox"
 }
 
 ]
