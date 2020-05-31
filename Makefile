@@ -22,8 +22,7 @@ AR= arm-linux-gnueabihf-ar
 CFLAGS += -march=armv7 -mthumb
 endif
 
-
-all:capture_RPiHQ startrails keogram sunwait-remove-precompiled sunwait
+all:capture capture_RPiHQ startrails keogram sunwait-remove-precompiled sunwait
 
 sunwait-remove-precompiled:
 ifneq ("arm", $(findstring $(platform), "arm"))
@@ -35,6 +34,9 @@ sunwait:
 		git submodule update
 		$(MAKE) -C sunwait-src
 		cp sunwait-src/sunwait .
+
+capture:capture.cpp
+	$(CC) capture.cpp lib/$(platform)/libASICamera2.a -o capture $(CFLAGS) $(OPENCV) -lusb-1.0
 
 capture_RPiHQ:capture_RPiHQ.cpp
 	$(CC)  capture_RPiHQ.cpp lib/$(platform)/libASICamera2.a -o capture_RPiHQ $(CFLAGS) $(OPENCV) -lusb-1.0
