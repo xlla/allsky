@@ -8,8 +8,7 @@ cd ~
 sudo apt-get install git make
 git clone --recursive https://github.com/RobboRob/allsky.git
 cd allsky
-make all
-./install_RPiQH.sh
+sudo ./install_RPiQH.sh
 ```
 Manual starting image capturing can be started via (but it is also possible to automatically start image capturing after a reboot of the Raspberry Pi):
 ```shell
