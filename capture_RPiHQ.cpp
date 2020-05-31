@@ -290,7 +290,7 @@ time ( NULL );
 
 		ss.str("");
 		ss << asiWBR;
-		awb  = "--awb off --awbgains " + ss.str() + " ";
+		awb  = "--awb off --awbgains " + ss.str();
 
 		ss.str("");
 		ss << asiWBB;
@@ -307,24 +307,17 @@ time ( NULL );
 	command += awb;
 
 	// Check if rotation is at least 0 degrees
-	if (asiRotation < 0)
+	if (asiRotation != 0 && asiRotation != 90 && asiRotation != 180 && asiRotation != 270)
 	{
 		// Set rotation to 0 degrees
 		asiRotation = 0;
-	}
-
-	// check if rotation is at most 359 degrees
-	if (asiRotation > 359)
-	{
-		// Set rotation to 359 degrees
-		asiRotation = 359;
 	}
 
 	ss.str("");
 	ss << asiRotation;
 
 	// Add white balance setting to raspistill command string
-	command += "--rotation "  + ss.str();
+	command += "--rotation "  + ss.str() + " ";
 
 	// Flip image
 	string flip = "";
@@ -735,7 +728,7 @@ int main(int argc, char *argv[])
 		printf(" -type = Image Type                 - Default = 0 - 0 = RAW8,  1 = RGB24,  2 = RAW16 \n");
 		printf(" -quality                           - Default = 70%%, 0%% (poor) 100%% (perfect)\n");
 		printf(" -filename                          - Default = image.jpg\n");
-		printf(" -rotation                          - Default = 0 degrees - Range 0 till 359 degrees\n");
+		printf(" -rotation                          - Default = 0 degrees - Options 0, 90, 180 or 270\n");
 		printf(" -flip                              - Default = 0 - 0 = Orig, 1 = Horiz, 2 = Verti, 3 = Both\n");
 		printf("\n");
 /*

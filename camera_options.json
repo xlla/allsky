@@ -116,7 +116,13 @@
 "defualt":"0",
 "description":"Set image rotation to enable proper orientation, range 0 - 359 degrees",
 "label":"Orientation",
-"type":"number"
+"type":"select",
+"options": [
+		{"value": "0", "label": "Original"},
+		{"value": "90", "label": "90 degrees"},
+		{"value": "180", "label": "180 degrees"},
+		{"value": "270", "label": "270 degrees"}
+]
 },
 {
 "name":"flip",
