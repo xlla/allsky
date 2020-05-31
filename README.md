@@ -14,7 +14,9 @@ make all
 Manual starting image capturing can be started via (but it is also possible to automatically start image capturing after a reboot of the Raspberry Pi):
 ```shell
 ./allsky_RPiHQ.sh
+```
 The web GUI can be installed via:
+```shell
 gui/install.sh
 cd /etc/raspap
 sudo mv camera_options.json camera_options.json.org
