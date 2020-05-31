@@ -5,7 +5,7 @@ source /home/pi/allsky/scripts/filename.sh
 
 cd /home/pi/allsky/
 
-scripts/batch-resize-images.sh $1
+scripts/batch-image-resize.sh $1
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
