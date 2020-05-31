@@ -16,6 +16,11 @@ Manual starting image capturing can be started via (but it is also possible to a
 ./allsky_RPiHQ.sh
 The web GUI can be installed via:
 gui/install.sh
+cd /etc/raspap
+sudo mv camera_options.json camera_options.json.org
+sudo cp ~/allsky/camera_options.json .
+sudo chown www-data:www-data camera_options.json
+sudo chmod 644 camera_options.json
 ```
 Test the GUI software using your favorite browser via http://[Your Raspberry Pi's IP address]
 
