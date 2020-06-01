@@ -923,6 +923,8 @@ int main(int argc, char *argv[])
 
 			// Set exposure value for night time capture
 			useDelay = delay;
+
+			currentExposure = asiExposure;
 		}
 
 		// Inform user
