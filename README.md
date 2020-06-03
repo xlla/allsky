@@ -6,16 +6,18 @@ When you have the HQ camera working on your Raspberry Pi (test using raspistill 
 ```shell
 cd ~
 sudo apt-get install git
-git clone --recursive https://github.com/RobboRob/allsky.git
+git clone https://github.com/RobboRob/allsky.git
 cd allsky
 sudo ./install_RPiHQ.sh
 ```
 Manual starting image capturing can be started via (but it is also possible to automatically start image capturing after a reboot of the Raspberry Pi):
 ```shell
+cd ~/allsky
 ./allsky_RPiHQ.sh
 ```
 The web GUI can be installed via:
 ```shell
+cd ~/allsky
 gui/install.sh
 cd /etc/raspap
 sudo mv camera_options.json camera_options.json.org
