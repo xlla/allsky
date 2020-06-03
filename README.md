@@ -18,7 +18,7 @@ cd ~/allsky
 The web GUI can be installed via:
 ```shell
 cd ~/allsky
-gui/install.sh
+sudo gui/install.sh
 cd /etc/raspap
 sudo mv camera_options.json camera_options.json.org
 sudo cp ~/allsky/camera_options.json .
