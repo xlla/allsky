@@ -43,12 +43,12 @@ echo -en '\n'
 
 echo -en "${GREEN}* Copy camera settings files\n${NC}"
 cp settings.json.repo_RPiHQ settings.json
-cp config.sh.repo config.sh                                                                                                                                            aut
+cp config.sh.repo config.sh
 cp scripts/ftp-settings.sh.repo scripts/ftp-settings.sh
 chown -R pi:pi ../allsky
 systemctl daemon-reload
 systemctl enable allsky.service
-echo -en '\n'        vi
+echo -en '\n'
 
 echo -en '\n'
 echo -en "The Allsky Software is now installed. You should reboot the Raspberry Pi to finish the installation\n"

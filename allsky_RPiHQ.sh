@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo Stopping running allsky service (when running, otherwise a warning is shown which can be ignored)
+/home/pi/allsky/stopallsky.sh
+
 echo Starting AllSky for Raspberry Pi HQ camera...
 
 ps -ef | grep allsky_RPiHQ.sh | grep -v $$ | xargs "sudo kill -9" 2>/dev/null
