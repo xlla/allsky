@@ -5,7 +5,7 @@
 When you have the HQ camera working on your Raspberry Pi (test using raspistill -v -o test.jpg) then download and install the adjusted AllSky software via:
 ```shell
 cd ~
-sudo apt-get install git make
+sudo apt-get install git
 git clone --recursive https://github.com/RobboRob/allsky.git
 cd allsky
 sudo ./install_RPiHQ.sh
