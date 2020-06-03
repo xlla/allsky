@@ -23,7 +23,7 @@ sudo cp ~/allsky/camera_options.json .
 sudo chown www-data:www-data camera_options.json
 sudo chmod 644 camera_options.json
 ```
-Test the GUI software using your favorite browser via http://[Your Raspberry Pi's IP address]
+Test the GUI software using your favorite browser via http://[Your Raspberry Pi's IP address]. The default username is 'admin' and the default password is 'secret'.
 
 NOTE: Not implemented yet for the RPi HQ camera:
 - dark frame correction
