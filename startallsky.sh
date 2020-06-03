@@ -1,1 +1,1 @@
-sudo service allsky start
+sudo service allsky_RPiHQ start

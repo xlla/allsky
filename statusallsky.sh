@@ -1,1 +1,1 @@
-sudo service allsky status
+sudo service allsky_RPiHQ status
