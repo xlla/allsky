@@ -31,6 +31,7 @@ sudo cp ~/allsky/camera_options.json .
 sudo chown www-data:www-data camera_options.json
 sudo chmod 644 camera_options.json
 sudo cp ~/allsky/restartCapture.sh /var/www/html
+sudo rm ~/allsky/restartCapture.sh
 ```
 Test the GUI software using your favorite browser via http://[Your Raspberry Pi's IP address]. The default username is 'admin' and the default password is 'secret'. The IP address can be obtained by executing:
 ```shell
