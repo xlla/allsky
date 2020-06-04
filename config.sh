@@ -45,6 +45,3 @@ DAYTIME="1"
 
 # Path to the camera settings (exposure, gain, delay, overlay, etc)
 CAMERA_SETTINGS="/etc/raspap/settings.json"
-
-# Indicate which camera is running
-CAMERA="RPiHQ"
