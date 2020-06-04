@@ -1,14 +1,14 @@
 {
    "width":"0",
    "height":"0",
-   "autoexposure":"1",
-   "exposure":"30000",
+   "autoexposure":"0",
+   "exposure":"60000",
    "autogain":"0",
-   "gain":"1",
+   "gain":"4",
    "gamma":"50",
    "brightness":"50",
    "awb":"0",
-   "wbr":"2",
+   "wbr":"2.5",
    "wbb":"2",
    "bin":"1",
    "delay":"10",
@@ -17,7 +17,7 @@
    "filename":"image.jpg",
    "rotation":"0",
    "flip":"0",
-   "latitude":"60.7N",
-   "longitude":"135.05W",
+   "latitude":"52.57N",
+   "longitude":"4.7E",
    "angle":"-6"
 }

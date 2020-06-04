@@ -1,1 +1,1 @@
-sudo service allskyRPiHQ stop
+sudo service allsky_RPiHQ stop

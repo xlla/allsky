@@ -47,7 +47,7 @@ cp config.sh.repo config.sh
 cp scripts/ftp-settings.sh.repo scripts/ftp-settings.sh
 chown -R pi:pi ../allsky
 systemctl daemon-reload
-systemctl enable allsky.service
+systemctl enable allsky_RPiHQ.service
 echo -en '\n'
 
 echo -en '\n'

@@ -928,7 +928,7 @@ int main(int argc, char *argv[])
 		}
 
 		// Inform user
-		printf("Press Ctrl+C twice quickly to stop capturing images...\n\n");
+		printf("Press Ctrl+Z to stop capturing images...\n\n");
 
 		// check if images should be captured
 		if (needCapture)
