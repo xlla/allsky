@@ -35,7 +35,7 @@ Test the GUI software using your favorite browser via http://[Your Raspberry Pi'
 ```shell
 hostname -I
 ```
-Check and change the default settings in the ~/allsky/config.sh file and, when using the Allsky web GUI via the camera settings page, or if you choose to only use the command line interface option check and alter in the settings.json file in the ~/allsky directory.
+Check and change the default settings in the ~/allsky/config.sh file and, when using the Allsky web GUI via the camera settings page, or if you choose to only use the command line interface option check and alter the settings.json file in the ~/allsky directory.
 
 NOTE: Not implemented yet for the RPi HQ camera:
 - dark frame correction
