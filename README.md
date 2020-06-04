@@ -33,6 +33,8 @@ sudo chmod 644 camera_options.json
 ```
 Test the GUI software using your favorite browser via http://[Your Raspberry Pi's IP address]. The default username is 'admin' and the default password is 'secret'.
 
+Check and change the default settings in the ~/allsky/config.sh file when using the Allsky web GUI via the camera settings page, or if you choose to only use the command line interface option check and alter in the settings.json file in the ~/allsky directory.
+
 NOTE: Not implemented yet for the RPi HQ camera:
 - dark frame correction
 - text annotations
