@@ -2,6 +2,12 @@
 
 # Instructions for installing the AllSky software for the newly released Raspberry Pi HQ Camera (released on 01-05-2020):
 
+Make sure you have runned beofre you start these installation steps so you are sure you are running the lastest version of raspistill and have loaded the latest firmware:
+```shell
+sudo rpi-update
+sudo apt update -y
+sudo apt full-upgrade -y
+```
 When you have the HQ camera working on your Raspberry Pi (test using raspistill -v -o test.jpg) then download and install the adjusted AllSky software via:
 ```shell
 cd ~
