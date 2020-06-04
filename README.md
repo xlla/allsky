@@ -2,7 +2,7 @@
 
 # Instructions for installing the AllSky software for the newly released Raspberry Pi HQ Camera (released on 01-05-2020):
 
-Make sure you have runned beofre you start these installation steps so you are sure you are running the lastest version of raspistill and have loaded the latest firmware:
+Make sure you have runned before you start these installation steps so you are sure you are running the lastest version of raspistill and have loaded the latest firmware:
 ```shell
 sudo rpi-update
 sudo apt update -y
@@ -30,6 +30,7 @@ sudo mv camera_options.json camera_options.json.org
 sudo cp ~/allsky/camera_options.json .
 sudo chown www-data:www-data camera_options.json
 sudo chmod 644 camera_options.json
+sudo cp ~/allsky/restartCapture.sh /var/www/html
 ```
 Test the GUI software using your favorite browser via http://[Your Raspberry Pi's IP address]. The default username is 'admin' and the default password is 'secret'. The IP address can be obtained by executing:
 ```shell
