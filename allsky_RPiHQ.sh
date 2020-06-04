@@ -2,8 +2,8 @@
 
 CAMERA=RPiHQ
 
-echo Stopping running allsky service when running, otherwise a warning is shown which can be ignored
-/home/pi/allsky/stopallsky.sh
+#echo Stopping running allsky service when running, otherwise a warning is shown which can be ignored
+#/home/pi/allsky/stopallsky.sh
 
 echo Starting AllSky for Raspberry Pi HQ camera...
 
