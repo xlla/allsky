@@ -48,13 +48,12 @@ echo -e "${GREEN}* Modify config.sh${NC}"
 sed -i '/CAMERA_SETTINGS=/c\CAMERA_SETTINGS="/etc/raspap/settings.json"' /home/pi/allsky/config.sh
 echo -en '\n'
 echo -en '\n'
-cd /etc/raspap
-sudo mv camera_options.json camera_options.json.org
-sudo cp ~/allsky/camera_options.json .
-sudo chown www-data:www-data camera_options.json
-sudo chmod 644 camera_options.json
-sudo cp ~/allsky/restartCapture.sh /var/www/html
-sudo rm ~/allsky/restartCapture.sh
+mv /etc/raspap/camera_options.json /etc/raspap/camera_options.json.org
+cp /home/pi//allsky/camera_options.json /etc/raspap
+chown www-data:www-data /etc/raspap/camera_options.json
+chmod 644 /etc/raspap/camera_options.json
+cp /home/pi/allsky/restartCapture.sh /var/www/html
+rm /home/pi/allsky/restartCapture.sh
 echo "The Allsky Portal is now installed"
 echo "You can now reboot the Raspberry Pi and connect to it from your laptop, computer, phone, tablet at this address: http://allsky.local"
 echo -en '\n'
