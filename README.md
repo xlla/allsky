@@ -2,28 +2,40 @@
 
 # Instructions for installing the AllSky software for the newly released Raspberry Pi HQ Camera (released on 01-05-2020):
 
+Make sure you have runned beofre you start these installation steps so you are sure you are running the lastest version of raspistill and have loaded the latest firmware:
+```shell
+sudo rpi-update
+sudo apt update -y
+sudo apt full-upgrade -y
+```
 When you have the HQ camera working on your Raspberry Pi (test using raspistill -v -o test.jpg) then download and install the adjusted AllSky software via:
 ```shell
 cd ~
 sudo apt-get install git
-git clone --recursive https://github.com/RobboRob/allsky.git
+git clone https://github.com/RobboRob/allsky.git
 cd allsky
 sudo ./install_RPiHQ.sh
 ```
 Manual starting image capturing can be started via (but it is also possible to automatically start image capturing after a reboot of the Raspberry Pi):
 ```shell
+cd ~/allsky
 ./allsky_RPiHQ.sh
 ```
 The web GUI can be installed via:
 ```shell
-gui/install.sh
+cd ~/allsky
+sudo gui/install.sh
 cd /etc/raspap
 sudo mv camera_options.json camera_options.json.org
 sudo cp ~/allsky/camera_options.json .
 sudo chown www-data:www-data camera_options.json
 sudo chmod 644 camera_options.json
 ```
-Test the GUI software using your favorite browser via http://[Your Raspberry Pi's IP address]. The default username is 'admin' and the default password is 'secret'.
+Test the GUI software using your favorite browser via http://[Your Raspberry Pi's IP address]. The default username is 'admin' and the default password is 'secret'. The IP address can be obtained by executing:
+```shell
+hostname -I
+```
+Check and change the default settings in the ~/allsky/config.sh file and, when using the Allsky web GUI via the camera settings page, or if you choose to only use the command line interface option check and alter the settings.json file in the ~/allsky directory.
 
 NOTE: Not implemented yet for the RPi HQ camera:
 - dark frame correction
