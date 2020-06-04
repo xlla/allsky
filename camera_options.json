@@ -15,21 +15,21 @@
 },
 {
 "name":"exposure",
-"default":10000,
+"default":60000,
 "description":"Time in ms (1000ms = 1 sec, range 1 - 240000 ms)",
 "label":"Exposure",
 "type":"number"
 },
 {
 "name":"autoexposure",
-"default":"1",
+"default":"0",
 "description":"Activate to enable auto-exposure",
 "label":"Auto-Exposure",
 "type":"checkbox"
 },
 {
 "name":"gain",
-"default":"1",
+"default":"4",
 "description":"Light sensitivity. Starts at 1 till 16. A high value returns a brighter image but more noise too",
 "label":"Gain",
 "type":"number"
@@ -64,7 +64,7 @@
 },
 {
 "name":"wbr",
-"default":"2",
+"default":"2.5",
 "description":"Red component for the White Balance, range 0 - 10",
 "label":"Red balance",
 "type":"text"
@@ -92,7 +92,7 @@
 },
 {
 "name":"daytimeDelay",
-"default":"5000",
+"default":"10000",
 "description":"Delay between images during daytime in milliseconds. 1000ms = 1 sec.",
 "label":"Daytime Delay",
 "type":"number"
