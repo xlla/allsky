@@ -21,6 +21,14 @@ Manual starting image capturing can be started via (but it is also possible to a
 cd ~/allsky
 ./allsky_RPiHQ.sh
 ```
+Enable or disable the automatic capturing service with:
+```shell
+sudo systemctl enable allsky_RPiHQ.service
+```
+and
+```shell
+sudo systemctl disable allsky_RPiHQ.service
+```
 The web GUI can be installed via:
 ```shell
 cd ~/allsky
