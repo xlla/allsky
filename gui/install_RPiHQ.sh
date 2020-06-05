@@ -54,7 +54,11 @@ chown www-data:www-data /etc/raspap/camera_options.json
 chmod 644 /etc/raspap/camera_options.json
 cp /home/pi/allsky/restartCapture.sh /var/www/html
 chmod 755 /var/www/html/restartCapture.sh
-rm /home/pi/allsky/restartCapture.sh
+#rm /home/pi/allsky/restartCapture.sh
+sudo cp /home/pi/allsky/gui/system.php /var/www/html
+sudo chown www-data:www-data /var/www/html/system.php
+sudo cp /home/pi/allsky/gui/camera_settings.php /var/www/html
+sudo chown www-data:www-data /var/www/html/camera_settings.php
 echo "The Allsky Portal is now installed"
 echo "You can now reboot the Raspberry Pi and connect to it from your laptop, computer, phone, tablet at this address: http://allsky.local"
 echo -en '\n'
