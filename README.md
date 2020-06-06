@@ -121,7 +121,7 @@ NOTE: Not implemented yet for the RPi HQ camera:
 - dark frame correction
 - text annotations
 
-# General Instructions
+# General Instructions and installation procedure for ZWO camera's
 
 This is the source code for the Wireless Allsky Camera project described [on Instructables](http://www.instructables.com/id/Wireless-All-Sky-Camera/).
 
@@ -472,6 +472,7 @@ If you've built an allsky camera, please send me a message and I'll add you to t
  	* When using the GUI, camera options can be saved without rebooting the RPi.
  	* Added a publicly accessible preview to the GUI: public.php
 	* Changed exposure unit to milliseconds instead of microseconds
+* version **0.7**: Added support for Raspberry Pi camera's
 
 ## Donation
 
