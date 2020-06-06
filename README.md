@@ -4,7 +4,7 @@
 
 Prerequisite RPi 3 or 4 with 16 GB (or greater) memory card and the HQ camera (aka camera V3).
 
-Setup SD card with the Buster NOOB build
+# Setup SD card with the Buster NOOB build
 
 Goto: https://www.raspberr…ownloads/noobs/
 
