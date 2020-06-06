@@ -2,12 +2,85 @@
 
 # Instructions for installing the AllSky software for the newly released Raspberry Pi HQ Camera (released on 01-05-2020):
 
-Make sure you have runned before you start these installation steps so you are sure you are running the lastest version of raspistill and have loaded the latest firmware:
+Prerequisite RPi 3 or 4 with 16 GB (or greater) memory card and the HQ camera (aka camera V3).
+
+Setup SD card with the Buster NOOB build
+
+Goto: https://www.raspberr…ownloads/noobs/
+
+Choose: NOOBS Lite Network install only and download the zip file.
+
+Copy the content of the ZIP file (so unzipped) onto the SD card.
+
+Put SD card in Raspberry Pi and fire it up…
+
+When starting with Command Line Interface (CLI):
+
+Log in for the first time (pi/raspberry)
+
+Change password to your liking with:
+```shell
+passwd
+```
+
+Configure the Raspberry Pi:
+```shell
+sudo raspi-config
+```
+
+Switch on 5 Interfacing Options->P1 Camera
+
+Optional switch on 5 Interfacing Options->P2 SSH (for ssh access, e.g. with Putty from Windows machine)
+	
+Set 7 Advanced Options->Memory Split to 256 MB
+
+Close raspi-config and choose to reboot.
+
+When starting in graphical user interface (GUI):
+
+Answer the localization questions in the dialogues to your liking and change your password.
+
+Start Preferences -> Raspberry Pi Configuration (via the raspberry icon at the left top):
+
+tab System:
+– fill in the desired hostname
+– select if you want to boot with the graphical (GUI) or command line interface (CLI)
+
+tab Interfaces:
+– Switch the camera on
+– Optional switch SSH on (for ssh access, e.g. with Putty from Windows machine)
+
+tab Performance:
+– set GPU memory on 256 MB
+
+Exit the raspi-config application and choose to reboot when the option is presented.
+
+Continue here regardless if you using the GUI or the command line interface
+
+After booting using the GUI option open terminal window (not needed for command line interface):
+
+Update and upgrade the Raspberry Pi:
 ```shell
 sudo rpi-update
+```
+(answer with y each time y/n is presented)
+
+reboot with:
+```shell
+sudo shutdown -r 0
+```
+
+When needed open terminal window after the reboot. Continue to ensure the Raspberry Pi is fully up to date with:
+```shell
 sudo apt update -y
 sudo apt full-upgrade -y
 ```
+
+Ensure in the future your Raspberry Pi automatically updates all packages:
+```shell
+sudo apt-get install unattended-upgrades -y
+```
+
 When you have the HQ camera working on your Raspberry Pi (test using raspistill -v -o test.jpg) then download and install the adjusted AllSky software via:
 ```shell
 cd ~
