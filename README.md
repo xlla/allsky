@@ -4,7 +4,7 @@
 
 Prerequisite RPi 3 or 4 with 16 GB (or greater) memory card and the HQ camera (aka camera V3).
 
-# Setup SD card with the Buster NOOB build
+## Setup SD card with the Buster NOOB build
 
 Goto: https://www.raspberr…ownloads/noobs/
 
@@ -14,7 +14,7 @@ Copy the content of the ZIP file (so unzipped) onto the SD card.
 
 Put SD card in Raspberry Pi and fire it up…
 
-When starting with Command Line Interface (CLI):
+## When starting with Command Line Interface (CLI):
 
 Log in for the first time (pi/raspberry)
 
@@ -36,7 +36,7 @@ Set 7 Advanced Options->Memory Split to 256 MB
 
 Close raspi-config and choose to reboot.
 
-When starting in graphical user interface (GUI):
+## When starting in graphical user interface (GUI):
 
 Answer the localization questions in the dialogues to your liking and change your password.
 
@@ -55,7 +55,7 @@ tab Performance:
 
 Exit the raspi-config application and choose to reboot when the option is presented.
 
-Continue here regardless if you using the GUI or the command line interface
+## Continue here regardless if you using the GUI or the command line interface
 
 After booting using the GUI option open terminal window (not needed for command line interface):
 
@@ -81,6 +81,8 @@ Ensure in the future your Raspberry Pi automatically updates all packages:
 sudo apt-get install unattended-upgrades -y
 ```
 
+## Install Allsky for Raspberry Pi HQ Camera
+
 When you have the HQ camera working on your Raspberry Pi (test using raspistill -v -o test.jpg) then download and install the adjusted AllSky software via:
 ```shell
 cd ~
@@ -102,6 +104,7 @@ and
 ```shell
 sudo systemctl disable allsky_RPiHQ.service
 ```
+
 The web GUI can be installed via:
 ```shell
 cd ~/allsky
@@ -113,6 +116,7 @@ hostname -I
 ```
 Check and change the default settings in the ~/allsky/config.sh file and, when using the Allsky web GUI via the camera settings page, or if you choose to only use the command line interface option check and alter the settings.json file in the ~/allsky directory.
 
+## Not implemented
 NOTE: Not implemented yet for the RPi HQ camera:
 - dark frame correction
 - text annotations
