@@ -2,17 +2,14 @@
 
 CAMERA=RPiHQ
 
-#echo Stopping running allsky service when running, otherwise a warning is shown which can be ignored
-#/home/pi/allsky/stopallsky.sh
-
-echo Starting AllSky for Raspberry Pi HQ camera...
-
+echo Making sure allsky_RPiHQ.sh is not already running...
 ps -ef | grep allsky_RPiHQ.sh | grep -v $$ | xargs "sudo kill -9" 2>/dev/null
 
+echo Read configured values...
 source /home/pi/allsky/config.sh
 source /home/pi/allsky/scripts/filename.sh
 
-echo "Starting allsky camera..."
+echo Starting AllSky for Raspberry Pi HQ camera...
 cd /home/pi/allsky
 
 # Building the arguments to pass to the capture binary

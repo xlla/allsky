@@ -313,11 +313,14 @@ time ( NULL );
 		asiRotation = 0;
 	}
 
-	ss.str("");
-	ss << asiRotation;
+	// check if rotation is needed
+	if (asiRotation!=0) {
+		ss.str("");
+		ss << asiRotation;
 
-	// Add white balance setting to raspistill command string
-	command += "--rotation "  + ss.str() + " ";
+		// Add white balance setting to raspistill command string
+		command += "--rotation "  + ss.str() + " ";
+	}
 
 	// Flip image
 	string flip = "";
