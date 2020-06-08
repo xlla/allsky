@@ -12,7 +12,7 @@
    "wbb":"2",
    "bin":"1",
    "delay":"10",
-   "daytimeDelay": "5000",
+   "daytimeDelay": "15000",
    "quality":"95",
    "filename":"image.jpg",
    "rotation":"0",

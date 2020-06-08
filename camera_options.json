@@ -92,7 +92,7 @@
 },
 {
 "name":"daytimeDelay",
-"default":"10000",
+"default":"15000",
 "description":"Delay between images during daytime in milliseconds. 1000ms = 1 sec.",
 "label":"Daytime Delay",
 "type":"number"
