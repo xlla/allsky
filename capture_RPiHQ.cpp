@@ -710,6 +710,7 @@ int main(int argc, char *argv[])
 
 	// Save the status of Auto Gain for night exposure
 	int oldAutoExposure = asiAutoExposure;
+	int oldGain = asiGain;
 
 	if (help == 1)
 	{
@@ -864,11 +865,9 @@ int main(int argc, char *argv[])
 
 		if (dayOrNight == "DAY")
 		{
-			// Preserve auto gain setting
-			oldAutoExposure = asiAutoExposure;
-
 			// Switch auto gain on
 			asiAutoExposure = 1;
+			asiGain = 1;
 
 			// Execute end of night script
 			if (endOfNight == true)
@@ -920,6 +919,7 @@ int main(int argc, char *argv[])
 		{
 			// Retrieve auto gain setting
 			asiAutoExposure = oldAutoExposure;
+			asiGain = oldGain;
 
 			// Inform user
 			printf("Saving %d seconds exposure images with %d ms delays in between...\n\n", (int)round(currentExposure / 1000000), delay);
