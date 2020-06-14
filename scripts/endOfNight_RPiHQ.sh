@@ -3,7 +3,12 @@ source /home/pi/allsky/config.sh
 source /home/pi/allsky/scripts/filename.sh
 
 cd  /home/pi/allsky/scripts
-LAST_NIGHT=$(date -d '12 hours ago' +'%Y%m%d')
+if [ $1 != "" ] ; then
+	LAST_NIGHT=$1
+
+else
+	LAST_NIGHT=$(date -d '12 hours ago' +'%Y%m%d')
+fi
 
 # Post end of night data. This includes next twilight time
 if [[ $POST_END_OF_NIGHT_DATA == "true" ]]; then

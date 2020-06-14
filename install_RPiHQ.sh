@@ -50,6 +50,8 @@ systemctl daemon-reload
 systemctl enable allsky_RPiHQ.service
 echo -en '\n'
 
+sudo chmod 755 ~/allsky/scripts/*.sh
+
 echo -en '\n'
 echo -en "The Allsky Software is now installed. You should reboot the Raspberry Pi to finish the installation\n"
 echo -en '\n'
