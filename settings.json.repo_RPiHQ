@@ -8,16 +8,16 @@
    "gamma":"50",
    "brightness":"50",
    "awb":"0",
-   "wbr":"2.5",
+   "wbr":"2.8",
    "wbb":"2",
    "bin":"1",
    "delay":"10",
-   "daytimeDelay": "15000",
+   "daytimeDelay": "30000",
    "quality":"95",
    "filename":"image.jpg",
    "rotation":"0",
-   "flip":"0",
+   "flip":"2",
    "latitude":"52.57N",
    "longitude":"4.7E",
-   "angle":"-6"
+   "angle":"-9"
 }
