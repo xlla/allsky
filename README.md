@@ -116,13 +116,9 @@ hostname -I
 ```
 Check and change the default settings in the ~/allsky/config.sh file and, when using the Allsky web GUI via the camera settings page, or if you choose to only use the command line interface option check and alter the settings.json file in the ~/allsky directory.
 
-## Notes:
-- Don't lower the Day Time Delay setting under 10 seconds because this can cause kernal panicks (the script then sometimes tries to take a new picture while the previous one is not yet written to disk yet)...
-
 ## Not implemented
 NOTE: Not implemented yet for the RPi HQ camera:
 - dark frame correction
-- text annotations
 
 # General Instructions and installation procedure for ZWO camera's
 
