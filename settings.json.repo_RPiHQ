@@ -17,6 +17,11 @@
    "filename":"image.jpg",
    "rotation":"0",
    "flip":"2",
+   "fontcolor":"255",
+   "background":"0",
+   "fontsize":"32",
+   "time":"1",
+   "showDetails":"1",
    "latitude":"52.57N",
    "longitude":"4.7E",
    "angle":"-9"

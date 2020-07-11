@@ -8,6 +8,7 @@
 //#include <sys/types.h>
 #include <errno.h>
 #include <string>
+#include <iomanip>
 #include <cstring>
 #include <sstream>
 //include <iostream>
@@ -42,26 +43,14 @@ bool bSavingImg = false;
 
 //-------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------
-/*
-void cvText(cv::Mat &img, const char *text, int x, int y, double fontsize, int linewidth, int linetype, int fontname,
-			int fontcolor[], int imgtype, int outlinefont)
-{
-	if (imgtype == ASI_IMG_RAW16)
-	{
-		if (outlinefont)
-			cv::putText(img, text, cvPoint(x, y), fontname, fontsize, cvScalar(0,0,0), linewidth+4, linetype);
-		cv::putText(img, text, cvPoint(x, y), fontname, fontsize, cvScalar(fontcolor[0], fontcolor[1], fontcolor[2]),
-					linewidth, linetype);
+std::string ReplaceAll(std::string str, const std::string& from, const std::string& to) {
+	size_t start_pos = 0;
+	while((start_pos = str.find(from, start_pos)) != std::string::npos) {
+		str.replace(start_pos, from.length(), to);
+		start_pos += to.length(); // Handles case where 'to' is a substring of 'from'
 	}
-	else
-	{
-		if (outlinefont)
-			cv::putText(img, text, cvPoint(x, y), fontname, fontsize, cvScalar(0,0,0, 255), linewidth+4, linetype);
-		cv::putText(img, text, cvPoint(x, y), fontname, fontsize,
-					cvScalar(fontcolor[0], fontcolor[1], fontcolor[2], 255), linewidth, linetype);
-	}
+	return str;
 }
-*/
 
 std::string exec(const char *cmd)
 {
@@ -129,7 +118,7 @@ void writeToLog(int val)
 }
 
 // Build capture command to capture the image from the HQ camera
-void RPiHQcapture(int asiAutoExposure, int asiExposure, int asiAutoGain, int asiAutoAWB, double asiGain, int bin, double asiWBR, double asiWBB, int asiRotation, int asiFlip, int asiGamma, int asiBrightness, int quality, const char* fileName)
+void RPiHQcapture(int asiAutoExposure, int asiExposure, int asiAutoGain, int asiAutoAWB, double asiGain, int bin, double asiWBR, double asiWBB, int asiRotation, int asiFlip, int asiGamma, int asiBrightness, int quality, const char* fileName, int time, int showDetails, const char* ImgText, int fontsize, int fontcolor, int background)
 {
 	//printf ("capturing image in file %s\n", fileName);
 
@@ -408,6 +397,47 @@ time ( NULL );
 	// Add image quality info to raspistill command string
 	command += squality;
 
+	if (showDetails)
+		command += "-a 1104 ";
+
+	if (time)
+		command += "-a 1036 ";
+	if (strcmp(ImgText, "") != 0) {
+		ss.str("");
+//		ss << ReplaceAll(ImgText, std::string(" "), std::string("_"));
+		ss << ImgText;
+		command += "-a " + ss.str() + " ";
+	}
+
+	if (fontsize < 6)
+		fontsize = 6;
+
+	if (fontsize > 160)
+		fontsize = 160;
+
+	ss.str("");
+	ss << fontsize;
+
+	if (fontcolor < 0)
+		fontcolor = 0;
+
+	if (fontcolor > 255)
+		fontcolor = 255;
+
+	std::stringstream C;
+	C  << std::setfill ('0') << std::setw(2) << std::hex << fontcolor;
+
+	if (background < 0)
+		background = 0;
+
+	if (background > 255)
+		background = 255;
+
+	std::stringstream B;
+	B  << std::setfill ('0') << std::setw(2) << std::hex << background;
+
+	command += "-ae " + ss.str() + ",0x" + C.str() + ",0x8080" + B.str() + " ";
+
 	// Define char variable
 	char cmd[command.length() + 1];
 
@@ -431,16 +461,21 @@ int main(int argc, char *argv[])
 					   CV_FONT_HERSHEY_COMPLEX,        CV_FONT_HERSHEY_TRIPLEX,       CV_FONT_HERSHEY_COMPLEX_SMALL,
 					   CV_FONT_HERSHEY_SCRIPT_SIMPLEX, CV_FONT_HERSHEY_SCRIPT_COMPLEX };
 	int fontnumber = 0;
-	int iStrLen, iTextX = 15, iTextY = 25;
+	int iStrLen;
+	int iTextX = 15, iTextY = 25;
+*/
 	char const *ImgText   = "";
-	double fontsize       = 0.6;
+	double fontsize       = 32;
+/*
 	int linewidth         = 1;
 	int outlinefont       = 0;
-	int fontcolor[3]      = { 255, 0, 0 };
+*/
+	int fontcolor         = 255;
+	int background        = 0;
+/*
 	int smallFontcolor[3] = { 0, 0, 255 };
 	int linetype[3]       = { CV_AA, 8, 4 };
 	int linenumber        = 0;
-
 	char buf[1024]    = { 0 };
 	char bufTime[128] = { 0 };
 	char bufTemp[128] = { 0 };
@@ -465,7 +500,8 @@ int main(int argc, char *argv[])
 	char const *longitude = "4.70E";
 	char const *angle  	  = "0"; // angle of the sun with the horizon (0=sunset, -6=civil twilight, -12=nautical twilight, -18=astronomical twilight)
 	//int preview           = 0;
-	// int time              = 1;
+	int time              = 1;
+	int showDetails       = 1;
 	// int darkframe         = 0;
 	int daytimeCapture    = 0;
 	int help              = 0;
@@ -591,12 +627,13 @@ int main(int argc, char *argv[])
 				asiWBB = atof(argv[i + 1]);
 				i++;
 			}
-/*
+
 			else if (strcmp(argv[i], "-text") == 0)
 			{
 				ImgText = (argv[i + 1]);
 				i++;
 			}
+/*
 			else if (strcmp(argv[i], "-textx") == 0)
 			{
 				iTextX = atoi(argv[i + 1]);
@@ -612,15 +649,18 @@ int main(int argc, char *argv[])
 				fontnumber = atoi(argv[i + 1]);
 				i++;
 			}
-			else if (strcmp(argv[i], "-fontcolor") == 0)
+*/
+			else if (strcmp(argv[i], "-background") == 0)
 			{
-				fontcolor[0] = atoi(argv[i + 1]);
-				i++;
-				fontcolor[1] = atoi(argv[i + 1]);
-				i++;
-				fontcolor[2] = atoi(argv[i + 1]);
+				background = atoi(argv[i + 1]);
 				i++;
 			}
+			else if (strcmp(argv[i], "-fontcolor") == 0)
+			{
+				fontcolor = atoi(argv[i + 1]);
+				i++;
+			}
+/*
 			else if (strcmp(argv[i], "-smallfontcolor") == 0)
 			{
 				smallFontcolor[0] = atoi(argv[i + 1]);
@@ -635,11 +675,13 @@ int main(int argc, char *argv[])
 				linenumber = atoi(argv[i + 1]);
 				i++;
 			}
+*/
 			else if (strcmp(argv[i], "-fontsize") == 0)
 			{
 				fontsize = atof(argv[i + 1]);
 				i++;
 			}
+/*
 			else if (strcmp(argv[i], "-fontline") == 0)
 			{
 				linewidth = atoi(argv[i + 1]);
@@ -689,17 +731,24 @@ int main(int argc, char *argv[])
 				preview = atoi(argv[i + 1]);
 				i++;
 			}
+*/
 			else if (strcmp(argv[i], "-time") == 0)
 			{
 				time = atoi(argv[i + 1]);
 				i++;
 			}
+/*
 			else if (strcmp(argv[i], "-darkframe") == 0)
 			{
 				darkframe = atoi(argv[i + 1]);
 				i++;
 			}
 */
+			else if (strcmp(argv[i], "-showDetails") == 0)
+			{
+				showDetails = atoi(argv[i + 1]);
+				i++;
+			}
 			else if (strcmp(argv[i], "-daytime") == 0)
 			{
 				daytimeCapture = atoi(argv[i + 1]);
@@ -735,21 +784,24 @@ int main(int argc, char *argv[])
 		printf(" -rotation                          - Default = 0 degrees - Options 0, 90, 180 or 270\n");
 		printf(" -flip                              - Default = 0 - 0 = Orig, 1 = Horiz, 2 = Verti, 3 = Both\n");
 		printf("\n");
-/*
 		printf(" -text                              - Default =      - Character/Text Overlay. Use Quotes.  Ex. -c "
 			   "\"Text Overlay\"\n");
+/*
 		printf(
 			" -textx                             - Default = 15   - Text Placement Horizontal from LEFT in Pixels\n");
 		printf(" -texty = Text Y                    - Default = 25   - Text Placement Vertical from TOP in Pixels\n");
 		printf(" -fontname = Font Name              - Default = 0    - Font Types (0-7), Ex. 0 = simplex, 4 = triplex, "
 			   "7 = script\n");
-		printf(" -fontcolor = Font Color            - Default = 255 0 0  - Text blue (BGR)\n");
+*/
+		printf(" -fontcolor = Font Color            - Default = 255  - Text gray scale color  (0 - 255)\n");
+		printf(" -background= Font Color            - Default = 0  - Backgroud gray scale color (0 - 255)\n");
+/*
 		printf(" -smallfontcolor = Small Font Color - Default = 0 0 255  - Text red (BGR)\n");
 		printf(" -fonttype = Font Type              - Default = 0    - Font Line Type,(0-2), 0 = AA, 1 = 8, 2 = 4\n");
-		printf(" -fontsize                          - Default = 0.5  - Text Font Size\n");
+*/
+		printf(" -fontsize                          - Default = 32  - Text Font Size (range 6 - 160, 32 default)\n");
+/*
 		printf(" -fontline                          - Default = 1    - Text Font Line Thickness\n");
-		//printf(" -bgc = BG Color                    - Default =      - Text Background Color in Hex. 00ff00 = Green\n");
-		//printf(" -bga = BG Alpha                    - Default =      - Text Background Color Alpha/Transparency 0-100\n");
 */
 		printf("\n");
 		printf("\n");
@@ -759,8 +811,9 @@ int main(int argc, char *argv[])
 			   "twilight, -12=nautical twilight, -18=astronomical twilight\n");
 		printf("\n");
 		// printf(" -preview                           - set to 1 to preview the captured images. Only works with a Desktop Environment \n");
-		// printf(" -time                              - Adds the time to the image. Combine with Text X and Text Y for placement \n");
+		 printf(" -time                             - Adds the time to the image.\n");
 		// printf(" -darkframe                         - Set to 1 to disable time and text overlay \n");
+		printf(" -showDetails                       - Set to 1 to display the metadata on the image \n");
 
 		printf("%sUsage:\n", KRED);
 		printf(" ./capture -width 640 -height 480 -exposure 5000000 -gamma 50 -bin 1 -filename Lake-Laberge.JPG\n\n");
@@ -804,14 +857,19 @@ int main(int argc, char *argv[])
 	printf(" Binning: %d\n", bin);
 	printf(" Delay: %dms\n", delay);
 	printf(" Daytime Delay: %dms\n", daytimeDelay);
+	printf(" Text Overlay: %s\n", ImgText);
 /*
-		printf(" Text Overlay: %s\n", ImgText);
 		printf(" Text Position: %dpx left, %dpx top\n", iTextX, iTextY);
 		printf(" Font Name:  %d\n", fontname[fontnumber]);
-		printf(" Font Color: %d , %d, %d\n", fontcolor[0], fontcolor[1], fontcolor[2]);
+*/
+		printf(" Font Color: %d\n", fontcolor);
+		printf(" Font Background Color: %d\n", background);
+/*
 		printf(" Small Font Color: %d , %d, %d\n", smallFontcolor[0], smallFontcolor[1], smallFontcolor[2]);
 		printf(" Font Line Type: %d\n", linetype[linenumber]);
+*/
 		printf(" Font Size: %1.1f\n", fontsize);
+/*
 		printf(" Font Line: %d\n", linewidth);
 		printf(" Outline Font : %d\n", outlinefont);
 */
@@ -822,7 +880,8 @@ int main(int argc, char *argv[])
 	printf(" Longitude: %s\n", longitude);
 	printf(" Sun Elevation: %s\n", angle);
 	// printf(" Preview: %d\n", preview);
-	// printf(" Time: %d\n", time);
+	 printf(" Time: %d\n", time);
+	printf(" Show Details: %d\n", showDetails);
 	// printf(" Darkframe: %d\n", darkframe);
 
 	// Show selected camera type
@@ -943,7 +1002,7 @@ int main(int argc, char *argv[])
 				printf("Capturing & saving image...\n");
 
 				// Capture and save image
-				RPiHQcapture(asiAutoExposure, currentExposure, asiAutoGain, asiAutoAWB, asiGain, bin, asiWBR, asiWBB, asiRotation, asiFlip, asiGamma, asiBrightness, quality, fileName);
+				RPiHQcapture(asiAutoExposure, currentExposure, asiAutoGain, asiAutoAWB, asiGain, bin, asiWBR, asiWBB, asiRotation, asiFlip, asiGamma, asiBrightness, quality, fileName, time, showDetails, ImgText, fontsize, fontcolor, background);
 
 				// Check if no processing is going on
 				if (!bSavingImg)

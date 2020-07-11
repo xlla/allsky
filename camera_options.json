@@ -138,6 +138,48 @@
 ]
 },
 {
+"name":"text",
+"default":"Limmen",
+"description":"Default text to position at the top center at the image",
+"label":"Image Title",
+"type":"text"
+},
+{
+"name":"time",
+"default":"1",
+"description":"Show the current date and time at the top center at the image",
+"label":"Show Time",
+"type":"checkbox"
+},
+{
+"name":"showDetails",
+"default":"1",
+"description":"Show image details at the top center at the image",
+"label":"Image Details",
+"type":"checkbox"
+},
+{
+"name":"fontsize",
+"default":"32",
+"description":"Font size 6 - 160, default value 32",
+"label":"Font Size",
+"type":"number"
+},
+{
+"name":"fontcolor",
+"default":"255",
+"description":"Annotation text font color in gray scale value 0 (black) - 255 (white)",
+"label":"Font Color",
+"type":"number"
+},
+{
+"name":"background",
+"default":"255",
+"description":"Background annotation text color in gray scale value 0 (black) - 255 (white)",
+"label":"Background Color",
+"type":"number"
+},
+{
 "name":"latitude",
 "default":"60.7N",
 "description":"Latitude of the camera. Needs a number (0 to 90) and direction (N or S). Ex: 60.7N",
