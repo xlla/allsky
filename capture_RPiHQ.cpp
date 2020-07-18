@@ -400,13 +400,14 @@ time ( NULL );
 	if (showDetails)
 		command += "-a 1104 ";
 
-	if (time)
+	if (time==1)
 		command += "-a 1036 ";
+
 	if (strcmp(ImgText, "") != 0) {
 		ss.str("");
 //		ss << ReplaceAll(ImgText, std::string(" "), std::string("_"));
 		ss << ImgText;
-		command += "-a " + ss.str() + " ";
+		command += "-a \"" + ss.str() + "\" ";
 	}
 
 	if (fontsize < 6)
@@ -465,6 +466,7 @@ int main(int argc, char *argv[])
 	int iTextX = 15, iTextY = 25;
 */
 	char const *ImgText   = "";
+	char const *param     = "";
 	double fontsize       = 32;
 /*
 	int linewidth         = 1;
@@ -500,8 +502,8 @@ int main(int argc, char *argv[])
 	char const *longitude = "4.70E";
 	char const *angle  	  = "0"; // angle of the sun with the horizon (0=sunset, -6=civil twilight, -12=nautical twilight, -18=astronomical twilight)
 	//int preview           = 0;
-	int time              = 1;
-	int showDetails       = 1;
+	int time              = 0;
+	int showDetails       = 0;
 	// int darkframe         = 0;
 	int daytimeCapture    = 0;
 	int help              = 0;
@@ -630,8 +632,28 @@ int main(int argc, char *argv[])
 
 			else if (strcmp(argv[i], "-text") == 0)
 			{
-				ImgText = (argv[i + 1]);
-				i++;
+				param = argv[i + 1];
+
+				const char *space = " ";
+
+				char buffer[256]; // <- danger, only storage for 256 characters.
+
+				int j = 0;
+
+				while (strncmp(param, "-", 1) != 0)
+				{
+					strncpy(buffer, ImgText, sizeof(buffer));
+					if (j)
+						strncat(buffer, space, sizeof(buffer));
+					strncat(buffer, param, sizeof(buffer));
+
+					ImgText = buffer;
+
+					i++;
+					j = 1;
+
+					param = argv[i + 1];
+				}
 			}
 /*
 			else if (strcmp(argv[i], "-textx") == 0)
@@ -880,7 +902,7 @@ int main(int argc, char *argv[])
 	printf(" Longitude: %s\n", longitude);
 	printf(" Sun Elevation: %s\n", angle);
 	// printf(" Preview: %d\n", preview);
-	 printf(" Time: %d\n", time);
+	printf(" Time: %d\n", time);
 	printf(" Show Details: %d\n", showDetails);
 	// printf(" Darkframe: %d\n", darkframe);
 

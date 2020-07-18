@@ -1,21 +1,21 @@
 [
 {
 "name":"width",
-"default":0,
+"default":"0",
 "description":"Image width. 0 = max width",
 "label":"Width",
 "type":"number"
 },
 {
 "name":"height",
-"default":0,
+"default":"0",
 "description":"Image height. 0 = max height",
 "label":"Height",
 "type":"number"
 },
 {
 "name":"exposure",
-"default":60000,
+"default":"60000",
 "description":"Time in ms (1000ms = 1 sec, range 1 - 240000 ms)",
 "label":"Exposure",
 "type":"number"
@@ -139,7 +139,7 @@
 },
 {
 "name":"text",
-"default":"Limmen",
+"default":"",
 "description":"Default text to position at the top center at the image",
 "label":"Image Title",
 "type":"text"
