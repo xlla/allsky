@@ -1,6 +1,8 @@
 #!/bin/bash
 
 git pull
+make
+sudo cp camera_settings.json /etc/raspap
 
 CAMERA=RPiHQ
 
