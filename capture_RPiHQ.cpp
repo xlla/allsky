@@ -630,28 +630,44 @@ int main(int argc, char *argv[])
 				i++;
 			}
 
+			// Check for text parameter
 			else if (strcmp(argv[i], "-text") == 0)
 			{
+				// Get first param
 				param = argv[i + 1];
 
+				// Space character
 				const char *space = " ";
 
-				char buffer[256]; // <- danger, only storage for 256 characters.
+				// Temporary text buffer
+				char buffer[1024]; // <- danger, only storage for 1024 characters.
 
+				// First word flag
 				int j = 0;
 
+				// Loop while next parameter doesn't start with a - character
 				while (strncmp(param, "-", 1) != 0)
 				{
+					// Copy Text into buffer
 					strncpy(buffer, ImgText, sizeof(buffer));
+
+					// Add a space after each word (skip for first word)
 					if (j)
 						strncat(buffer, space, sizeof(buffer));
+
+					// Add parameter
 					strncat(buffer, param, sizeof(buffer));
 
+					// Copy buffer into ImgText variable
 					ImgText = buffer;
 
+					// Increase parameter counter
 					i++;
+
+					// Flag first word is entered
 					j = 1;
 
+					// Get next parameter
 					param = argv[i + 1];
 				}
 			}

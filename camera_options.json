@@ -21,13 +21,6 @@
 "type":"number"
 },
 {
-"name":"autoexposure",
-"default":"0",
-"description":"Activate to enable auto-exposure",
-"label":"Auto-Exposure",
-"type":"checkbox"
-},
-{
 "name":"gain",
 "default":"4",
 "description":"Light sensitivity. Starts at 1 till 16. A high value returns a brighter image but more noise too",
