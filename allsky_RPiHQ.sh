@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo Starting AllSky for Raspberry Pi HQ camera...
+cd /home/pi/allsky
+
 echo Ensuring you are running the latest software...
 if [ `git pull | wc -c` != 20 ]; then
 	echo Compiling software...
@@ -18,9 +21,6 @@ ps -ef | grep allsky_RPiHQ.sh | grep -v $$ | xargs "sudo kill -9" 2>/dev/null
 echo Read configured values...
 source /home/pi/allsky/config.sh
 source /home/pi/allsky/scripts/filename.sh
-
-echo Starting AllSky for Raspberry Pi HQ camera...
-cd /home/pi/allsky
 
 # Building the arguments to pass to the capture binary
 ARGUMENTS=""
