@@ -581,13 +581,13 @@ int main(int argc, char *argv[])
 				asiExposure = atoi(argv[i + 1]) * 1000;
 				i++;
 			}
-/*
+
 			else if (strcmp(argv[i], "-autoexposure") == 0)
 			{
 				asiAutoExposure = atoi(argv[i + 1]);
 				i++;
 			}
-*/
+
 			else if (strcmp(argv[i], "-autofocus") == 0)
 			{
 				asiAutoFocus = atoi(argv[i + 1]);
@@ -628,11 +628,13 @@ int main(int argc, char *argv[])
 				daytimeDelay = atoi(argv[i + 1]);
 				i++;
 			}
+/*
 			else if (strcmp(argv[i], "-awb") == 0)
 			{
 				asiAutoAWB = atoi(argv[i + 1]);
 				i++;
 			}
+*/
 			else if (strcmp(argv[i], "-wbr") == 0)
 			{
 				asiWBR = atof(argv[i + 1]);
@@ -819,13 +821,13 @@ int main(int argc, char *argv[])
 		printf(" -width                             - Default = Camera Max Width \n");
 		printf(" -height                            - Default = Camera Max Height \n");
 		printf(" -exposure                          - Default = 5000000 - Time in µs (equals to 5 sec) \n");
-//		printf(" -autoexposure                      - Default = 0 - Set to 1 to enable auto Exposure \n");
+		printf(" -autoexposure                      - Default = 0 - Set to 1 to enable auto Exposure \n");
 		printf(" -autofocus                         - Default = 0 - Set to 1 to enable auto Focus \n");
 		printf(" -gain                              - Default = 1 (1 - 16) \n");
 		printf(" -autogain                          - Default = 0 - Set to 1 to enable auto Gain \n");
 		printf(" -gamma                             - Default = 50 (-100 till 100)\n");
 		printf(" -brightness                        - Default = 50 (0 till 100) \n");
-		printf(" -awb                               - Default = 0 - Auto White Balance (0 = off)\n");
+//		printf(" -awb                               - Default = 0 - Auto White Balance (0 = off)\n");
 		printf(" -wbr                               - Default = 2 - White Balance Red  (0 = off)\n");
 		printf(" -wbb                               - Default = 2 - White Balance Blue (0 = off)\n");
 		printf(" -bin                               - Default = 1 - binning OFF (1x1), 2 = 2x2, 3 = 3x3 binning\n");
@@ -899,13 +901,13 @@ int main(int argc, char *argv[])
 	printf(" Resolution: %dx%d \n", width, height);
 	printf(" Quality: %d \n", quality);
 	printf(" Exposure: %1.0fms\n", round(asiExposure / 1000));
-//	printf(" Auto Exposure: %d\n", asiAutoExposure);
+	printf(" Auto Exposure: %d\n", asiAutoExposure);
 	printf(" Auto Focus: %d\n", asiAutoFocus);
 	printf(" Gain: %1.2f\n", asiGain);
 	printf(" Auto Gain: %d\n", asiAutoGain);
 	printf(" Brightness: %d\n", asiBrightness);
 	printf(" Gamma: %d\n", asiGamma);
-	printf(" Auto White Balance: %d\n", asiAutoAWB);
+//	printf(" Auto White Balance: %d\n", asiAutoAWB);
 	printf(" WB Red: %1.2f\n", asiWBR);
 	printf(" WB Blue: %1.2f\n", asiWBB);
 	printf(" Binning: %d\n", bin);
