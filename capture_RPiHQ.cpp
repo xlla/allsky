@@ -206,6 +206,7 @@ time ( NULL );
 	string shutter;
 
 	// Check if automatic determined exposure time is selected
+
 	if (asiAutoExposure)
 	{
 		shutter = "--exposure auto ";
@@ -580,11 +581,13 @@ int main(int argc, char *argv[])
 				asiExposure = atoi(argv[i + 1]) * 1000;
 				i++;
 			}
+/*
 			else if (strcmp(argv[i], "-autoexposure") == 0)
 			{
 				asiAutoExposure = atoi(argv[i + 1]);
 				i++;
 			}
+*/
 			else if (strcmp(argv[i], "-autofocus") == 0)
 			{
 				asiAutoFocus = atoi(argv[i + 1]);
