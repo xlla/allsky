@@ -153,7 +153,7 @@ time ( NULL );
 	ss << fileName;
 
 	// Define strings for raspistill command string and
-	string command = "nice raspistill --nopreview --thumb none --output " + ss.str() + " --burst -st ";
+	string command = "nice raspistill --nopreview --thumb none --output " + ss.str() + " --burst -st --focus ";
 
 	// Define strings for roi (used for binning) string
 	string roi;
@@ -179,14 +179,14 @@ time ( NULL );
 	else if (bin==2)
 	{
 		// Select binning 2x2 (2028 x 1520 pixels)
-		roi = "--mode 2 ";
+		roi = "--mode 2  --width 2028 --height 1520 ";
 	}
 
 	// Check if binning 3x3 is selected
 	else
 	{
 		// Select binning 3x3 (1352 x 1013 pixels)
-		roi = "--mode 4 ";
+		roi = "--mode 4 --width 1012 --height 760 ";
 	}
 
 	// Append binning window
