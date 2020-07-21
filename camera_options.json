@@ -136,6 +136,13 @@
 ]
 },
 {
+"name":"autofocus",
+"default":"0",
+"description":"Auto Focus",
+"label":"Auto Focus",
+"type":"checkbox"
+},
+{
 "name":"text",
 "default":"",
 "description":"Default text to position at the top center at the image",

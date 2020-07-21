@@ -118,7 +118,7 @@ void writeToLog(int val)
 }
 
 // Build capture command to capture the image from the HQ camera
-void RPiHQcapture(int asiAutoExposure, int asiExposure, int asiAutoGain, int asiAutoAWB, double asiGain, int bin, double asiWBR, double asiWBB, int asiRotation, int asiFlip, int asiGamma, int asiBrightness, int quality, const char* fileName, int time, int showDetails, const char* ImgText, int fontsize, int fontcolor, int background)
+void RPiHQcapture(int asiAutoFocus, int asiAutoExposure, int asiExposure, int asiAutoGain, int asiAutoAWB, double asiGain, int bin, double asiWBR, double asiWBB, int asiRotation, int asiFlip, int asiGamma, int asiBrightness, int quality, const char* fileName, int time, int showDetails, const char* ImgText, int fontsize, int fontcolor, int background)
 {
 	//printf ("capturing image in file %s\n", fileName);
 
@@ -153,7 +153,7 @@ time ( NULL );
 	ss << fileName;
 
 	// Define strings for raspistill command string and
-	string command = "nice raspistill --nopreview --thumb none --output " + ss.str() + " --burst -st --focus ";
+	string command = "nice raspistill --nopreview --thumb none --output " + ss.str() + " --burst -st ";
 
 	// Define strings for roi (used for binning) string
 	string roi;
@@ -221,6 +221,11 @@ time ( NULL );
 
 	// Add exposure time setting to raspistill command string
 	command += shutter;
+
+	if (asiAutoFocus)
+	{
+		command += "--focus ";
+	}
 
 	// Anolog Gain
 	string gain;
@@ -487,6 +492,7 @@ int main(int argc, char *argv[])
 	int bin               = 2;
 	int asiExposure       = 60000000;
 	int asiAutoExposure   = 0;
+	int asiAutoFocus      = 0;
 	double asiGain        = 4;
 	int asiAutoGain       = 0;
 	int asiAutoAWB        = 0;
@@ -577,6 +583,11 @@ int main(int argc, char *argv[])
 			else if (strcmp(argv[i], "-autoexposure") == 0)
 			{
 				asiAutoExposure = atoi(argv[i + 1]);
+				i++;
+			}
+			else if (strcmp(argv[i], "-autofocus") == 0)
+			{
+				asiAutoFocus = atoi(argv[i + 1]);
 				i++;
 			}
 			else if (strcmp(argv[i], "-gain") == 0)
@@ -806,6 +817,7 @@ int main(int argc, char *argv[])
 		printf(" -height                            - Default = Camera Max Height \n");
 		printf(" -exposure                          - Default = 5000000 - Time in µs (equals to 5 sec) \n");
 //		printf(" -autoexposure                      - Default = 0 - Set to 1 to enable auto Exposure \n");
+		printf(" -autofocus                         - Default = 0 - Set to 1 to enable auto Focus \n");
 		printf(" -gain                              - Default = 1 (1 - 16) \n");
 		printf(" -autogain                          - Default = 0 - Set to 1 to enable auto Gain \n");
 		printf(" -gamma                             - Default = 50 (-100 till 100)\n");
@@ -885,6 +897,7 @@ int main(int argc, char *argv[])
 	printf(" Quality: %d \n", quality);
 	printf(" Exposure: %1.0fms\n", round(asiExposure / 1000));
 //	printf(" Auto Exposure: %d\n", asiAutoExposure);
+	printf(" Auto Focus: %d\n", asiAutoFocus);
 	printf(" Gain: %1.2f\n", asiGain);
 	printf(" Auto Gain: %d\n", asiAutoGain);
 	printf(" Brightness: %d\n", asiBrightness);
@@ -1040,7 +1053,7 @@ int main(int argc, char *argv[])
 				printf("Capturing & saving image...\n");
 
 				// Capture and save image
-				RPiHQcapture(asiAutoExposure, currentExposure, asiAutoGain, asiAutoAWB, asiGain, bin, asiWBR, asiWBB, asiRotation, asiFlip, asiGamma, asiBrightness, quality, fileName, time, showDetails, ImgText, fontsize, fontcolor, background);
+				RPiHQcapture(asiAutoFocus, asiAutoExposure, currentExposure, asiAutoGain, asiAutoAWB, asiGain, bin, asiWBR, asiWBB, asiRotation, asiFlip, asiGamma, asiBrightness, quality, fileName, time, showDetails, ImgText, fontsize, fontcolor, background);
 
 				// Check if no processing is going on
 				if (!bSavingImg)
