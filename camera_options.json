@@ -72,9 +72,14 @@
 {
 "name":"bin",
 "default":"1",
-"description":"1 = binning OFF (1x1), 2 = 2x2 binning, 3 = 3x3 binning. Check available binning mode for your camera",
+"description":"1 = binning OFF (1x1), 2x2 binning, 4 = 4x4 binning",
 "label":"Binning",
-"type":"number"
+"type":"select",
+"options": [
+		{"value": "1", "label": "1x1 binning"},
+		{"value": "2", "label": "2x2 binning"},
+		{"value": "4", "label": "4x4 binning"}
+]
 },
 {
 "name":"delay",

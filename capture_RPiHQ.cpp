@@ -185,7 +185,7 @@ time ( NULL );
 	// Check if binning 3x3 is selected
 	else
 	{
-		// Select binning 3x3 (1352 x 1013 pixels)
+		// Select binning 4x4 (1012 x 760 pixels)
 		roi = "--mode 4 --width 1012 --height 760 ";
 	}
 
