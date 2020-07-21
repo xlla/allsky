@@ -1,8 +1,14 @@
 #!/bin/bash
 
-git pull
-make
-sudo cp camera_settings.json /etc/raspap
+echo Ensuring you are running the latest software...
+if [ `git pull | wc -c` != 20 ]; then
+	echo Compiling software...
+	make
+	if [ -f "/etc/raspap/camara_settings.json"] ; then
+		echo Copying camera settings file...
+		sudo cp camera_settings.json /etc/raspap
+	fi
+fi
 
 CAMERA=RPiHQ
 
