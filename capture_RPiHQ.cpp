@@ -810,7 +810,7 @@ int main(int argc, char *argv[])
 		printf(" -autogain                          - Default = 0 - Set to 1 to enable auto Gain \n");
 		printf(" -gamma                             - Default = 50 (-100 till 100)\n");
 		printf(" -brightness                        - Default = 50 (0 till 100) \n");
-		printf(" -awb                               - Default = 0 - Auto White Balance (0 = off)\n");
+//		printf(" -awb                               - Default = 0 - Auto White Balance (0 = off)\n");
 		printf(" -wbr                               - Default = 2 - White Balance Red  (0 = off)\n");
 		printf(" -wbb                               - Default = 2 - White Balance Blue (0 = off)\n");
 		printf(" -bin                               - Default = 1 - binning OFF (1x1), 2 = 2x2, 3 = 3x3 binning\n");
@@ -889,7 +889,7 @@ int main(int argc, char *argv[])
 	printf(" Auto Gain: %d\n", asiAutoGain);
 	printf(" Brightness: %d\n", asiBrightness);
 	printf(" Gamma: %d\n", asiGamma);
-	printf(" Auto White Balance: %d\n", asiAutoAWB);
+//	printf(" Auto White Balance: %d\n", asiAutoAWB);
 	printf(" WB Red: %1.2f\n", asiWBR);
 	printf(" WB Blue: %1.2f\n", asiWBB);
 	printf(" Binning: %d\n", bin);
