@@ -1,5 +1,7 @@
 #!/bin/bash
 
+git pull
+
 CAMERA=RPiHQ
 
 echo Making sure allsky_RPiHQ.sh is not already running...
