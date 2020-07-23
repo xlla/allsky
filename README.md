@@ -116,6 +116,10 @@ hostname -I
 ```
 Check and change the default settings in the ~/allsky/config.sh file and, when using the Allsky web GUI via the camera settings page, or if you choose to only use the command line interface option check and alter the settings.json file in the ~/allsky directory.
 
+# Dark Frame correction
+
+Follow the instructions below regarding dark frame correction with one exception: configure the filename as dark.jpg instead of dark.png.
+
 # General Instructions and installation procedure for ZWO camera's
 
 This is the source code for the Wireless Allsky Camera project described [on Instructables](http://www.instructables.com/id/Wireless-All-Sky-Camera/).
