@@ -118,7 +118,7 @@ void writeToLog(int val)
 }
 
 // Build capture command to capture the image from the HQ camera
-void RPiHQcapture(int asiAutoFocus, int asiAutoExposure, int asiExposure, int asiAutoGain, int asiAutoAWB, double asiGain, int bin, double asiWBR, double asiWBB, int asiRotation, int asiFlip, int asiGamma, int asiBrightness, int quality, const char* fileName, int time, int showDetails, const char* ImgText, int fontsize, int fontcolor, int background)
+void RPiHQcapture(int asiAutoFocus, int asiAutoExposure, int asiExposure, int asiAutoGain, int asiAutoAWB, double asiGain, int bin, double asiWBR, double asiWBB, int asiRotation, int asiFlip, int asiGamma, int asiBrightness, int quality, const char* fileName, int time, int showDetails, const char* ImgText, int fontsize, int fontcolor, int background, int darkframe)
 {
 	//printf ("capturing image in file %s\n", fileName);
 
@@ -403,47 +403,49 @@ time ( NULL );
 	// Add image quality info to raspistill command string
 	command += squality;
 
-	if (showDetails)
-		command += "-a 1104 ";
+	if (!darkframe) {
+		if (showDetails)
+			command += "-a 1104 ";
 
-	if (time==1)
-		command += "-a 1036 ";
+		if (time==1)
+			command += "-a 1036 ";
 
-	if (strcmp(ImgText, "") != 0) {
+		if (strcmp(ImgText, "") != 0) {
+			ss.str("");
+	//		ss << ReplaceAll(ImgText, std::string(" "), std::string("_"));
+			ss << ImgText;
+			command += "-a \"" + ss.str() + "\" ";
+		}
+
+		if (fontsize < 6)
+			fontsize = 6;
+
+		if (fontsize > 160)
+			fontsize = 160;
+
 		ss.str("");
-//		ss << ReplaceAll(ImgText, std::string(" "), std::string("_"));
-		ss << ImgText;
-		command += "-a \"" + ss.str() + "\" ";
+		ss << fontsize;
+
+		if (fontcolor < 0)
+			fontcolor = 0;
+
+		if (fontcolor > 255)
+			fontcolor = 255;
+
+		std::stringstream C;
+		C  << std::setfill ('0') << std::setw(2) << std::hex << fontcolor;
+
+		if (background < 0)
+			background = 0;
+
+		if (background > 255)
+			background = 255;
+
+		std::stringstream B;
+		B  << std::setfill ('0') << std::setw(2) << std::hex << background;
+
+		command += "-ae " + ss.str() + ",0x" + C.str() + ",0x8080" + B.str() + " ";
 	}
-
-	if (fontsize < 6)
-		fontsize = 6;
-
-	if (fontsize > 160)
-		fontsize = 160;
-
-	ss.str("");
-	ss << fontsize;
-
-	if (fontcolor < 0)
-		fontcolor = 0;
-
-	if (fontcolor > 255)
-		fontcolor = 255;
-
-	std::stringstream C;
-	C  << std::setfill ('0') << std::setw(2) << std::hex << fontcolor;
-
-	if (background < 0)
-		background = 0;
-
-	if (background > 255)
-		background = 255;
-
-	std::stringstream B;
-	B  << std::setfill ('0') << std::setw(2) << std::hex << background;
-
-	command += "-ae " + ss.str() + ",0x" + C.str() + ",0x8080" + B.str() + " ";
 
 	// Define char variable
 	char cmd[command.length() + 1];
@@ -1057,7 +1059,7 @@ int main(int argc, char *argv[])
 				printf("Capturing & saving image...\n");
 
 				// Capture and save image
-				RPiHQcapture(asiAutoFocus, asiAutoExposure, currentExposure, asiAutoGain, asiAutoAWB, asiGain, bin, asiWBR, asiWBB, asiRotation, asiFlip, asiGamma, asiBrightness, quality, fileName, time, showDetails, ImgText, fontsize, fontcolor, background);
+				RPiHQcapture(asiAutoFocus, asiAutoExposure, currentExposure, asiAutoGain, asiAutoAWB, asiGain, bin, asiWBR, asiWBB, asiRotation, asiFlip, asiGamma, asiBrightness, quality, fileName, time, showDetails, ImgText, fontsize, fontcolor, background, darkframe);
 
 				// Check if no processing is going on
 				if (!bSavingImg)
