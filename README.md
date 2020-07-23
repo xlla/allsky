@@ -116,10 +116,6 @@ hostname -I
 ```
 Check and change the default settings in the ~/allsky/config.sh file and, when using the Allsky web GUI via the camera settings page, or if you choose to only use the command line interface option check and alter the settings.json file in the ~/allsky directory.
 
-## Not implemented
-NOTE: Not implemented yet for the RPi HQ camera:
-- dark frame correction
-
 # General Instructions and installation procedure for ZWO camera's
 
 This is the source code for the Wireless Allsky Camera project described [on Instructables](http://www.instructables.com/id/Wireless-All-Sky-Camera/).
