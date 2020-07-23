@@ -38,7 +38,7 @@ AUTO_DELETE=true
 NIGHTS_TO_KEEP=14
 
 # Path to the dark frame for hot pixels subtraction. Can be jpg or png.
-DARK_FRAME="dark.png"
+DARK_FRAME="dark.jpg"
 
 # Set to 0 to disable Daytime Capture
 DAYTIME="1"

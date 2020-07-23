@@ -143,6 +143,13 @@
 "type":"checkbox"
 },
 {
+"name":"darkframe",
+"default":"0",
+"description":"capture Dark frame",
+"label":"Dark Frame",
+"type":"checkbox"
+},
+{
 "name":"text",
 "default":"",
 "description":"Default text to position at the top center at the image",

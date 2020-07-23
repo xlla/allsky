@@ -511,7 +511,7 @@ int main(int argc, char *argv[])
 	//int preview           = 0;
 	int time              = 0;
 	int showDetails       = 0;
-	// int darkframe         = 0;
+	int darkframe         = 0;
 	int daytimeCapture    = 0;
 	int help              = 0;
 	int quality           = 90;
@@ -791,13 +791,12 @@ int main(int argc, char *argv[])
 				time = atoi(argv[i + 1]);
 				i++;
 			}
-/*
+
 			else if (strcmp(argv[i], "-darkframe") == 0)
 			{
 				darkframe = atoi(argv[i + 1]);
 				i++;
 			}
-*/
 			else if (strcmp(argv[i], "-showDetails") == 0)
 			{
 				showDetails = atoi(argv[i + 1]);
@@ -866,8 +865,8 @@ int main(int argc, char *argv[])
 			   "twilight, -12=nautical twilight, -18=astronomical twilight\n");
 		printf("\n");
 		// printf(" -preview                           - set to 1 to preview the captured images. Only works with a Desktop Environment \n");
-		 printf(" -time                             - Adds the time to the image.\n");
-		// printf(" -darkframe                         - Set to 1 to disable time and text overlay \n");
+		printf(" -time                              - Adds the time to the image.\n");
+		printf(" -darkframe                         - Set to 1 to disable time and text overlay \n");
 		printf(" -showDetails                       - Set to 1 to display the metadata on the image \n");
 
 		printf("%sUsage:\n", KRED);
@@ -938,7 +937,7 @@ int main(int argc, char *argv[])
 	// printf(" Preview: %d\n", preview);
 	printf(" Time: %d\n", time);
 	printf(" Show Details: %d\n", showDetails);
-	// printf(" Darkframe: %d\n", darkframe);
+	printf(" Darkframe: %d\n", darkframe);
 
 	// Show selected camera type
 	printf(" Camera: Raspberry Pi HQ camera\n");
