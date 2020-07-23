@@ -1,4 +1,4 @@
-# Allsky Camera ![Release 0.7](https://img.shields.io/badge/Release-0.7-green.svg) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MEBU2KN75G2NG&source=url)
+# Allsky Camera ![Release 0.8](https://img.shields.io/badge/Release-0.8-green.svg) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MEBU2KN75G2NG&source=url)
 
 # Instructions for installing the AllSky software for the newly released Raspberry Pi HQ Camera (released on 01-05-2020):
 
@@ -119,6 +119,10 @@ Check and change the default settings in the ~/allsky/config.sh file and, when u
 ## Dark Frame correction
 
 Follow the instructions below regarding dark frame correction with one exception: configure the filename as dark.jpg instead of dark.png.
+
+## Auto update
+
+The HQ camera software version will automatically update when changes/additions are made to this version of the software.
 
 # General Instructions and installation procedure for ZWO camera's
 
