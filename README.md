@@ -122,7 +122,7 @@ Follow the instructions below regarding dark frame correction with one exception
 
 ## Auto update
 
-The HQ camera software version will automatically update when changes/additions are made to this version of the software.
+The HQ camera software version will automatically update when changes/additions are made to this version of the software. To check foiir new versions of the software stop and start the service or save the camera settings (which will stop and start the service for you).
 
 # General Instructions and installation procedure for ZWO camera's
 
