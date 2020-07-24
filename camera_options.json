@@ -145,7 +145,7 @@
 {
 "name":"darkframe",
 "default":"0",
-"description":"Capture dak frames",
+"description":"Capture dark frames",
 "label":"Dark Frame",
 "type":"checkbox"
 },
