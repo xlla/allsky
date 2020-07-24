@@ -868,7 +868,7 @@ int main(int argc, char *argv[])
 		printf("\n");
 		// printf(" -preview                           - set to 1 to preview the captured images. Only works with a Desktop Environment \n");
 		printf(" -time                              - Adds the time to the image.\n");
-		printf(" -darkframe                         - Set to 1 to disable time and text overlay \n");
+		printf(" -darkframe                         - Set to 1 to grab dark frame and cover your camera \n");
 		printf(" -showDetails                       - Set to 1 to display the metadata on the image \n");
 
 		printf("%sUsage:\n", KRED);
