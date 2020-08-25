@@ -4,7 +4,7 @@
 # Author: Mike
 
 # absolute path to image folder
-FOLDER="/home/pi/allsky/images/$1"
+FOLDER="/home/pi/allsky/images/${1}/small"
 
 # max width
 WIDTH=1920
@@ -19,7 +19,8 @@ HEIGHT=1078
 #find ${FOLDER} -iname '*.png' -exec convert \{} -verbose -resize $WIDTHx$HEIGHT\> \{} \;
 
 #resize jpg only to either height or width, keeps proportions using imagemagick
-find ${FOLDER} -maxdepth 1 -iname 'image-*.jpg' -exec nice convert \{} -verbose -resize $WIDTHx$HEIGHT\> \{} \;
+#find ${FOLDER} -maxdepth 1 -iname 'image-*.jpg' -exec nice convert \{} -verbose -resize ${WIDTH}x${HEIGHT}\> \{} \;
+find ${FOLDER} -maxdepth 1 -iname 'image-*.jpg' -exec nice convert \{} -verbose -adaptive-resize 1920x1078\> \{} \;
 
 # alternative
 #mogrify -path ${FOLDER} -resize ${WIDTH}x${HEIGHT}% *.png -verbose

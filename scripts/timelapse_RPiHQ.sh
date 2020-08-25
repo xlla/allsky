@@ -21,7 +21,7 @@ mkdir images/$1/small
 cp images/$1/*.$EXTENSION images/$1/small
 
 echo -en "* ${GREEN}Resize images...${NC}\n"
-scripts/batch-image-resize.sh $1/small
+scripts/batch-image-resize.sh $1
 
 echo -en "* ${GREEN}Creating symlinks to generate timelapse${NC}\n"
 mkdir /home/pi/allsky/images/$1/small/sequence/
