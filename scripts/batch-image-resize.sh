@@ -4,7 +4,8 @@
 # Author: Mike
 
 # absolute path to image folder
-FOLDER="/home/pi/allsky/images/${1}/small"
+FOLDER=~/allsky/images/${1}/small
+echo "Resizing images in folder ${FOLDER}..."
 
 # max width
 WIDTH=1920

@@ -31,7 +31,7 @@ sudo raspi-config
 Switch on 5 Interfacing Options->P1 Camera
 
 Optional switch on 5 Interfacing Options->P2 SSH (for ssh access, e.g. with Putty from Windows machine)
-	
+
 Set 7 Advanced Options->Memory Split to 256 MB
 
 Close raspi-config and choose to reboot.
@@ -250,7 +250,7 @@ nano config.sh
 | NIGHTS_TO_KEEP | 14 | Number of nights to keep before starting deleting. Needs AUTO_DELETE=true to work. |
 | DARK_FRAME | dark.png | Path to the dark frame use for hot pixels subtraction. |
 | DAYTIME | 1 | Set to 0 to disable daytime liveview. |
-| CAMERA_SETTINGS | /home/pi/allsky/settings.json | Path to the camera settings file. **Note**: If using the GUI, this path will change to /var/www/html/settings.json |
+| CAMERA_SETTINGS | ~/allsky/settings.json | Path to the camera settings file. **Note**: If using the GUI, this path will change to /var/www/html/settings.json |
 
 In order to upload images and videos to your website, you'll need to fill your FTP connection details in **ftp-settings.sh**
 ```shell
@@ -470,10 +470,10 @@ If you've built an allsky camera, please send me a message and I'll add you to t
 	* Keograms and Startrails generation is now much faster thanks to a rewrite by Jarno Paananen.
 * version **0.6**: Added daytime exposure and auto-exposure capability
 	* Added -maxexposure, -autoexposure, -maxgain, -autogain options. Note that using autoexposure and autogain at the same time may produce unexpected results (black frames).
- 	* Autostart is now based on systemd and should work on all raspbian based systems, including headless distributions. Remote controlling will not start multiple instances of the software.
- 	* Replaced `nodisplay` option with `preview` argument. No preview in autostart mode.
- 	* When using the GUI, camera options can be saved without rebooting the RPi.
- 	* Added a publicly accessible preview to the GUI: public.php
+	* Autostart is now based on systemd and should work on all raspbian based systems, including headless distributions. Remote controlling will not start multiple instances of the software.
+	* Replaced `nodisplay` option with `preview` argument. No preview in autostart mode.
+	* When using the GUI, camera options can be saved without rebooting the RPi.
+	* Added a publicly accessible preview to the GUI: public.php
 	* Changed exposure unit to milliseconds instead of microseconds
 * version **0.7**: Added support for Raspberry Pi camera's
 

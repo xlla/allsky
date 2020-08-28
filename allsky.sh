@@ -1,16 +1,16 @@
 #!/bin/bash
 isPresent=$(lsusb -D $(lsusb | awk '/ 03c3:/ { bus=$2; dev=$4; gsub(/[^0-9]/,"",dev); print "/dev/bus/usb/"bus"/"dev;}') | grep -c 'iProduct .*ASI[0-9]')
 if [ $isPresent -eq 0 ]; then
-        echo ZWO Camera not found.  Exiting. >&2
-        sudo systemctl stop allsky
-        exit 0
+		echo ZWO Camera not found.  Exiting. >&2
+		sudo systemctl stop allsky
+		exit 0
 fi
 
-source /home/pi/allsky/config.sh
-source /home/pi/allsky/scripts/filename.sh
+source ~/allsky/config.sh
+source ~/allsky/scripts/filename.sh
 
 echo "Starting allsky camera..."
-cd /home/pi/allsky
+cd ~/allsky
 
 # Building the arguments to pass to the capture binary
 ARGUMENTS=""

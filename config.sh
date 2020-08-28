@@ -1,5 +1,5 @@
 #!/bin/bash
-source /home/pi/allsky/scripts/ftp-settings.sh
+source ~/allsky/scripts/ftp-settings.sh
 
 # Set to true to upload current image to your website
 UPLOAD_IMG=false

@@ -4,7 +4,7 @@ After=multi-user.target
 
 [Service]
 User=pi
-ExecStart=/home/pi/allsky/allsky.sh
+ExecStart=~/allsky/allsky.sh
 StandardOutput=null
 StandardError=syslog
 SyslogFacility=local5

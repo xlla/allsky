@@ -19,7 +19,7 @@ service lighttpd restart
 echo -en '\n'
 
 echo -e "${GREEN}* Configuring lighttpd${NC}"
-cp /home/pi/allsky/gui/lighttpd.conf /etc/lighttpd/lighttpd.conf
+cp ~/allsky/gui/lighttpd.conf /etc/lighttpd/lighttpd.conf
 echo -en '\n'
 
 echo -e "${GREEN}* Changing hostname to allsky${NC}"
@@ -28,14 +28,14 @@ sed -i 's/raspberrypi/allsky/g' /etc/hosts
 echo -en '\n'
 
 echo -e "${GREEN}* Setting avahi-daemon configuration${NC}"
-cp /home/pi/allsky/gui/avahi-daemon.conf /etc/avahi/avahi-daemon.conf
+cp ~/allsky/gui/avahi-daemon.conf /etc/avahi/avahi-daemon.conf
 echo -en '\n'
 
 echo -e "${GREEN}* Adding the right permissions to the web server${NC}"
 sed -i '/allsky/d' /etc/sudoers
 sed -i '/www-data/d' /etc/sudoers
 rm -f /etc/sudoers.d/allsky
-cat /home/pi/allsky/gui/sudoers >> /etc/sudoers.d/allsky
+cat ~/allsky/gui/sudoers >> /etc/sudoers.d/allsky
 echo -en '\n'
 
 echo -e "${GREEN}* Retrieving github files to build admin portal${NC}"
@@ -45,32 +45,32 @@ chown -R www-data:www-data /var/www/html
 mkdir /etc/raspap
 mv /var/www/html/raspap.php /etc/raspap/
 mv /var/www/html/camera_options.json /etc/raspap/
-cp /home/pi/allsky/settings.json /etc/raspap/settings.json
+cp ~/allsky/settings.json /etc/raspap/settings.json
 chown -R www-data:www-data /etc/raspap
 usermod -a -G www-data pi
 echo -en '\n'
 
 echo -e "${GREEN}* Modify config.sh${NC}"
-sed -i '/CAMERA_SETTINGS=/c\CAMERA_SETTINGS="/etc/raspap/settings.json"' /home/pi/allsky/config.sh
+sed -i '/CAMERA_SETTINGS=/c\CAMERA_SETTINGS="/etc/raspap/settings.json"' ~/allsky/config.sh
 echo -en '\n'
 
 echo -e "${GREEN}* Put adjusted RPI HQ camera options file in place${NC}"
 mv /etc/raspap/camera_options.json /etc/raspap/camera_options.json.org
-cp /home/pi//allsky/camera_options.json /etc/raspap
+cp ~/allsky/camera_options.json /etc/raspap
 chown www-data:www-data /etc/raspap/camera_options.json
 chmod 644 /etc/raspap/camera_options.json
 echo -en '\n'
 
 echo -e "${GREEN}* Replace restartCapture.sh with adjusted RPI HQ camera version${NC}"
-cp /home/pi/allsky/restartCapture.sh /var/www/html
+cp ~/allsky/restartCapture.sh /var/www/html
 chmod 755 /var/www/html/restartCapture.sh
-#rm /home/pi/allsky/restartCapture.sh
+#rm ~/allsky/restartCapture.sh
 echo -en '\n'
 
 echo -e "${GREEN}* Replace system.php and camrea_options.php files with adjusted RPI HQ camera version${NC}"
-sudo cp /home/pi/allsky/gui/system.php /var/www/html/includes
+sudo cp ~/allsky/gui/system.php /var/www/html/includes
 sudo chown www-data:www-data /var/www/html/includes/system.php
-sudo cp /home/pi/allsky/gui/camera_settings.php /var/www/html/includes
+sudo cp ~/allsky/gui/camera_settings.php /var/www/html/includes
 sudo chown www-data:www-data /var/www/html/includes/camera_settings.php
 echo -en '\n'
 
