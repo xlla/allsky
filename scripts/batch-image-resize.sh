@@ -5,7 +5,7 @@
 
 # absolute path to image folder
 FOLDER=~/allsky/images/${1}/small
-echo "Resizing images in folder ${FOLDER}..."
+#echo "Resizing images in folder ${FOLDER}..."
 
 # max width
 WIDTH=1920

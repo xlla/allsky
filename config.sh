@@ -1,6 +1,9 @@
 #!/bin/bash
 source ~/allsky/scripts/ftp-settings.sh
 
+# Set camera type
+CAMERA=RPiHQ
+
 # Set to true to upload current image to your website
 UPLOAD_IMG=false
 
