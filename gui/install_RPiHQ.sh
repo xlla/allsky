@@ -56,7 +56,7 @@ echo -en '\n'
 
 echo -e "${GREEN}* Put adjusted RPI HQ camera options file in place${NC}"
 mv /etc/raspap/camera_options.json /etc/raspap/camera_options.json.org
-cp ~/allsky/camera_options.json /etc/raspap
+cp ~/allsky/camera_options.json /etc/raspap/camera_options_RPiHQ.json
 chown www-data:www-data /etc/raspap/camera_options.json
 chmod 644 /etc/raspap/camera_options.json
 echo -en '\n'
@@ -67,11 +67,14 @@ chmod 755 /var/www/html/restartCapture.sh
 #rm ~/allsky/restartCapture.sh
 echo -en '\n'
 
-echo -e "${GREEN}* Replace system.php and camrea_options.php files with adjusted RPI HQ camera version${NC}"
-sudo cp ~/allsky/gui/system.php /var/www/html/includes
-sudo chown www-data:www-data /var/www/html/includes/system.php
+echo -e "${GREEN}* Replace system.php and camera_options.php files with adjusted RPI HQ camera version${NC}"
+#sudo cp ~/allsky/gui/system.php /var/www/html/includes
+#sudo chown www-data:www-data /var/www/html/includes/system.php
 sudo cp ~/allsky/gui/camera_settings.php /var/www/html/includes
 sudo chown www-data:www-data /var/www/html/includes/camera_settings.php
+cd /var/www/html
+ln -s /home/pi/allsky/images current
+
 echo -en '\n'
 
 echo "The Allsky Portal is now installed"
