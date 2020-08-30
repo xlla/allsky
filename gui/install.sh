@@ -18,20 +18,20 @@ lighty-enable-mod fastcgi-php
 service lighttpd restart
 echo -en '\n'
 echo -e "${GREEN}* Configuring lighttpd${NC}"
-cp ~/allsky/gui/lighttpd.conf /etc/lighttpd/lighttpd.conf
+cp /home/pi/allsky/gui/lighttpd.conf /etc/lighttpd/lighttpd.conf
 echo -en '\n'
 echo -e "${GREEN}* Changing hostname to allsky${NC}"
 echo "allsky" > /etc/hostname
 sed -i 's/raspberrypi/allsky/g' /etc/hosts
 echo -en '\n'
 echo -e "${GREEN}* Setting avahi-daemon configuration${NC}"
-cp ~/allsky/gui/avahi-daemon.conf /etc/avahi/avahi-daemon.conf
+cp /home/pi/allsky/gui/avahi-daemon.conf /etc/avahi/avahi-daemon.conf
 echo -en '\n'
 echo -e "${GREEN}* Adding the right permissions to the web server${NC}"
 sed -i '/allsky/d' /etc/sudoers
 sed -i '/www-data/d' /etc/sudoers
 rm -f /etc/sudoers.d/allsky
-cat ~/allsky/gui/sudoers >> /etc/sudoers.d/allsky
+cat /home/pi/allsky/gui/sudoers >> /etc/sudoers.d/allsky
 echo -en '\n'
 echo -e "${GREEN}* Retrieving github files to build admin portal${NC}"
 rm -rf /var/www/html
@@ -40,7 +40,7 @@ chown -R www-data:www-data /var/www/html
 mkdir /etc/raspap
 mv /var/www/html/raspap.php /etc/raspap/
 mv /var/www/html/camera_options.json /etc/raspap/camera_options_ZWO.sh
-cp ~/allsky/settings.json /etc/raspap/settings_ZWO.json
+cp /home/pi/allsky/settings.json /etc/raspap/settings_ZWO.json
 chown -R www-data:www-data /etc/raspap
 usermod -a -G www-data pi
 echo -en '\n'
