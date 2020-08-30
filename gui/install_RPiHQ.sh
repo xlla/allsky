@@ -79,10 +79,10 @@ sudo chmod 664 /etc/raspap/settings_RPiHQ.json
 echo -en '\n'
 
 echo -e "${GREEN}* Replace system.php and camera_options.php files with adjusted RPI HQ camera version${NC}"
-sudo cp /home/pi/allsky/gui/system.php /var/www/html/includes
+sudo cp /home/pi/allsky/system.php /var/www/html/includes
 sudo chown www-data:www-data /var/www/html/includes/system.php
 
-sudo cp /home/pi/allsky/gui/camera_settings.php /var/www/html/includes
+sudo cp /home/pi/allsky/camera_settings.php /var/www/html/includes
 sudo chown www-data:www-data /var/www/html/includes/camera_settings.php
 
 cd /var/www/html
