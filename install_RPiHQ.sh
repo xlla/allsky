@@ -52,9 +52,11 @@ echo -en '\n'
 
 sudo chmod 755 /home/pi/allsky/scripts/*.sh
 
+echo -en "${GREEN}* Create image directory if it does not exist yet\n${NC}"
 if [ ! -d '/home/pi/allsky/images' ] ; then
-	mkdir /home/pi/images
+	mkdir /home/pi/allsky/images
 fi
+echo -en '\n'
 
 echo -en '\n'
 echo -en "The Allsky Software is now installed. You should reboot the Raspberry Pi to finish the installation\n"
