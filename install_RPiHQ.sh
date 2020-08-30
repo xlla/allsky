@@ -52,6 +52,10 @@ echo -en '\n'
 
 sudo chmod 755 /home/pi/allsky/scripts/*.sh
 
+if [ ! -d '/home/pi/allsky/images' ] ; then
+	mkdir /home/pi/images
+fi
+
 echo -en '\n'
 echo -en "The Allsky Software is now installed. You should reboot the Raspberry Pi to finish the installation\n"
 echo -en '\n'
