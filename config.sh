@@ -47,4 +47,4 @@ DARK_FRAME="dark.jpg"
 DAYTIME="1"
 
 # Path to the camera settings (exposure, gain, delay, overlay, etc)
-CAMERA_SETTINGS="/etc/raspap/settings.json"
+CAMERA_SETTINGS="/etc/raspap/settings_RPiHQ.json"
