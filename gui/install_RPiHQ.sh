@@ -53,14 +53,26 @@ sed -i '/CAMERA_SETTINGS=/c\CAMERA_SETTINGS="/etc/raspap/settings_RPiHQ.json"' /
 echo -en '\n'
 
 echo -e "${GREEN}* Put adjusted RPI HQ camera options & settings file in place${NC}"
-sudo mv /etc/raspap/camera_options.json /etc/raspap/camera_options_RPiHQ.json
-sudo mv /etc/raspap/camera_options_RPiHQ.json /etc/raspap/camera_options_RPiHQ.json.org
+if [ -f '/etc/raspap/camera_options.json' ] ; then
+	sudo mv /etc/raspap/camera_options.json /etc/raspap/camera_options_RPiHQ.json
+fi
+
+if [ -f '/etc/raspap/camera_options_RPiHQ.json' ] ; then
+	sudo mv /etc/raspap/camera_options_RPiHQ.json /etc/raspap/camera_options_RPiHQ.json.org
+fi
+
 sudo cp /home/pi/allsky/camera_options.json /etc/raspap/camera_options_RPiHQ.json
 sudo chown www-data:www-data /etc/raspap/camera_options_RPiHQ.json
 sudo chmod 644 /etc/raspap/camera_options_RPiHQ.json
 
-sudo mv /etc/raspap/setting.json /etc/raspap/settings_RPiHQ.json
-sudo mv /etc/raspap/settings_RPiHQ.json /etc/raspap/settings_RPiHQ.json.org
+if [ -f '/etc/raspap/setting.json' ] ; then
+	sudo mv /etc/raspap/setting.json /etc/raspap/settings_RPiHQ.json
+fi
+
+if [ -f '/etc/raspap/settings_RPiHQ.json' ] ; then
+	sudo mv /etc/raspap/settings_RPiHQ.json /etc/raspap/settings_RPiHQ.json.org
+fi
+
 sudo cp /home/pi/allsky/settings_RPiHQ.json.repo /etc/raspap/settings_RPiHQ.json
 sudo chown www-data:www-data /etc/raspap/settings_RPiHQ.json
 sudo chmod 664 /etc/raspap/settings_RPiHQ.json
