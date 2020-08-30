@@ -74,7 +74,7 @@ echo -e "${GREEN}* Replace system.php and camera_options.php files with adjusted
 sudo cp ~/allsky/gui/camera_settings.php /var/www/html/includes
 sudo chown www-data:www-data /var/www/html/includes/camera_settings.php
 cd /var/www/html
-ln -s /home/pi/allsky current
+sudo ln -s /home/pi/allsky current
 
 echo -en '\n'
 
