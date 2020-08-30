@@ -57,13 +57,13 @@ echo -en '\n'
 echo -e "${GREEN}* Put adjusted RPI HQ camera options & settings file in place${NC}"
 mv /etc/raspap/camera_options.json /etc/raspap/camera_options_RPiHQ.json
 mv /etc/raspap/camera_options_RPiHQ.json /etc/raspap/camera_options_RPiHQ.json.org
-sudo cp ~/allsky/camera_options.json /etc/raspap/camera_options_RPiHQ.json
+sudo cp /home/pi/allsky/camera_options.json /etc/raspap/camera_options_RPiHQ.json
 sudo chown www-data:www-data /etc/raspap/camera_options_RPiHQ.json
 sudo chmod 644 /etc/raspap/camera_options_RPiHQ.json
 
 mv /etc/raspap/setting.json /etc/raspap/settings_RPiHQ.json
 mv /etc/raspap/settings_RPiHQ.json /etc/raspap/settings_RPiHQ.json.org
-sudo cp ~/allsky/settings_RPiHQ.json /etc/raspap/settings_RPiHQ.json
+sudo cp /home/pi/allsky/settings_RPiHQ.json /etc/raspap/settings_RPiHQ.json
 sudo chown www-data:www-data /etc/raspap/settings_RPiHQ.json
 sudo chmod 664 /etc/raspap/settings_RPiHQ.json
 echo -en '\n'
