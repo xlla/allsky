@@ -45,20 +45,21 @@ chown -R www-data:www-data /var/www/html
 mkdir /etc/raspap
 mv /var/www/html/raspap.php /etc/raspap/
 mv /var/www/html/camera_options.json /etc/raspap/
-cp ~/allsky/settings.json /etc/raspap/settings.json
+cp ~/allsky/settings.json /etc/raspap/settings_RPiHQ.json
 chown -R www-data:www-data /etc/raspap
 usermod -a -G www-data pi
 echo -en '\n'
 
 echo -e "${GREEN}* Modify config.sh${NC}"
-sed -i '/CAMERA_SETTINGS=/c\CAMERA_SETTINGS="/etc/raspap/settings.json"' ~/allsky/config.sh
+sed -i '/CAMERA_SETTINGS=/c\CAMERA_SETTINGS="/etc/raspap/settings_RPiHQ.json"' ~/allsky/config.sh
 echo -en '\n'
 
 echo -e "${GREEN}* Put adjusted RPI HQ camera options file in place${NC}"
-mv /etc/raspap/camera_options.json /etc/raspap/camera_options.json.org
+mv /etc/raspap/camera_options.json /etc/raspap/camera_options_RPiHQ.json
+mv /etc/raspap/camera_options_RPiHQ.json /etc/raspap/camera_options_RPiHQ.json.org
 cp ~/allsky/camera_options.json /etc/raspap/camera_options_RPiHQ.json
-chown www-data:www-data /etc/raspap/camera_options.json
-chmod 644 /etc/raspap/camera_options.json
+chown www-data:www-data /etc/raspap/camera_options_RPiHQ.json
+chmod 644 /etc/raspap/camera_options_RPiHQ.json
 echo -en '\n'
 
 echo -e "${GREEN}* Replace restartCapture.sh with adjusted RPI HQ camera version${NC}"

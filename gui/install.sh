@@ -39,13 +39,13 @@ git clone https://github.com/thomasjacquin/allsky-portal.git /var/www/html
 chown -R www-data:www-data /var/www/html
 mkdir /etc/raspap
 mv /var/www/html/raspap.php /etc/raspap/
-mv /var/www/html/camera_options.json /etc/raspap/camera_options_RPiHQ.sh
-cp ~/allsky/settings.json /etc/raspap/settings_RPiHQ.json
+mv /var/www/html/camera_options.json /etc/raspap/camera_options_ZWO.sh
+cp ~/allsky/settings.json /etc/raspap/settings_ZWO.json
 chown -R www-data:www-data /etc/raspap
 usermod -a -G www-data pi
 echo -en '\n'
 echo -e "${GREEN}* Modify config.sh${NC}"
-sed -i '/CAMERA_SETTINGS=/c\CAMERA_SETTINGS="/etc/raspap/settings_RPiHQ.json"' ~/allsky/config.sh
+sed -i '/CAMERA_SETTINGS=/c\CAMERA_SETTINGS="/etc/raspap/settings_ZWO.json"' ~/allsky/config.sh
 echo -en '\n'
 echo -en '\n'
 echo "The Allsky Portal is now installed"
