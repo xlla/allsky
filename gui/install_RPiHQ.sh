@@ -61,7 +61,7 @@ sudo chmod 644 /etc/raspap/camera_options_RPiHQ.json
 
 sudo mv /etc/raspap/setting.json /etc/raspap/settings_RPiHQ.json
 sudo mv /etc/raspap/settings_RPiHQ.json /etc/raspap/settings_RPiHQ.json.org
-sudo cp /home/pi/allsky/settings_RPiHQ.json /etc/raspap/settings_RPiHQ.json
+sudo cp /home/pi/allsky/settings_RPiHQ.json.repo /etc/raspap/settings_RPiHQ.json
 sudo chown www-data:www-data /etc/raspap/settings_RPiHQ.json
 sudo chmod 664 /etc/raspap/settings_RPiHQ.json
 echo -en '\n'
