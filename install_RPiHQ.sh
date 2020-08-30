@@ -45,7 +45,7 @@ echo -en "${GREEN}* Copy camera settings files\n${NC}"
 cp settings.json.repo_RPiHQ settings.json
 cp config.sh.repo config.sh
 cp scripts/ftp-settings.sh.repo scripts/ftp-settings.sh
-chown -R pi:pi home/pi/allsky
+chown -R pi:pi /home/pi/allsky
 systemctl daemon-reload
 systemctl enable allsky_RPiHQ.service
 echo -en '\n'
