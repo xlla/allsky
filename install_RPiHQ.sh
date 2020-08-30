@@ -42,7 +42,7 @@ chmod 0644 /etc/rsyslog.d/allsky.conf
 echo -en '\n'
 
 echo -en "${GREEN}* Copy camera settings files\n${NC}"
-cp settings.json.repo_RPiHQ settings.json
+cp settings_RPiHQ.json.repo settings.json
 cp config.sh.repo config.sh
 cp scripts/ftp-settings.sh.repo scripts/ftp-settings.sh
 chown -R pi:pi /home/pi/allsky
