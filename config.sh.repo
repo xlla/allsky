@@ -47,4 +47,4 @@ DARK_FRAME="dark.png"
 DAYTIME="1"
 
 # Path to the camera settings (exposure, gain, delay, overlay, etc)
-CAMERA_SETTINGS="~/allsky/settings.json"
+CAMERA_SETTINGS=~/allsky/settings.json
