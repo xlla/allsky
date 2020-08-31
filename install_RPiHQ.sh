@@ -42,15 +42,29 @@ chmod 0644 /etc/rsyslog.d/allsky.conf
 echo -en '\n'
 
 echo -en "${GREEN}* Copy camera settings files\n${NC}"
-cp settings_RPiHQ.json.repo settings.json
-cp config_RPiHQ.sh.repo config.sh
-cp scripts/ftp-settings.sh.repo scripts/ftp-settings.sh
+if ! -f 'settings.json' ] ; then
+	cp settings_RPiHQ.json.repo settings.json
+fi
+if [ ! -f 'config.sh' ] ; then
+	cp config_RPiHQ.sh.repo config.sh
+fi
+if [ ! -f 'scripts/ftp-settings.sh' ] ; then
+	cp scripts/ftp-settings.sh.repo scripts/ftp-settings.sh
+fi
+echo -en '\n'
+
+echo -en "${GREEN}* Change ownership of all files in allsky directory to pi:pi\n${NC}"
 chown -R pi:pi /home/pi/allsky
+echo -en '\n'
+
+echo -en "${GREEN}* Start all sky service\n${NC}"
 systemctl daemon-reload
 systemctl enable allsky_RPiHQ.service
 echo -en '\n'
 
+echo -en "${GREEN}* Making sure all scripts in scripts directory are executable\n${NC}"
 sudo chmod 755 /home/pi/allsky/scripts/*.sh
+echo -en '\n'
 
 echo -en "${GREEN}* Create image directory if it does not exist yet\n${NC}"
 if [ ! -d '/home/pi/allsky/images' ] ; then
