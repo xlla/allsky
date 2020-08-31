@@ -91,6 +91,10 @@ sudo chown www-data:www-data /var/www/html/includes/editor.php
 cd /var/www/html
 echo -en '\n'
 
+echo -e "${GREEN}* Add www-data user to the pi user group${NC}"
+sudo adduser www-data pi
+echo -en '\n'
+
 echo -e "${GREEN}* Create softlink current to /home/pi/allsky${NC}"
 sudo ln -s /home/pi/allsky current
 echo -en '\n'
