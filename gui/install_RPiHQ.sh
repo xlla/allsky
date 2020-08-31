@@ -89,7 +89,7 @@ sudo cp /home/pi/allsky/editor.php /var/www/html/includes
 sudo chown www-data:www-data /var/www/html/includes/editor.php
 
 cd /var/www/html
-#echo -en '\n'
+echo -en '\n'
 
 echo -e "${GREEN}* Create softlink current to /home/pi/allsky${NC}"
 sudo ln -s /home/pi/allsky current
