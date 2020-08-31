@@ -4,9 +4,9 @@ source ~/allsky/config.sh
 # TODO Needs fixing when civil twilight happens after midnight
 cd ~/allsky/scripts
 
-latitude=60.7N
-longitude=135.02W
-timezone=-0700
+latitude=52.57N
+longitude=4.7E
+timezone=+0100
 streamDaytime=false
 
 if [[ $DAYTIME == "1" ]] ; then
