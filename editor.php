@@ -71,7 +71,6 @@ function DisplayEditor()
                                     style="display: inline-block; width: auto; margin-right: 15px; margin-bottom: 5px"
                                     >
                                 <option value="current/config.sh">config.sh</option>
-                                <option value="current/allsky.sh">allsky.sh</option>
                                 <option value="current/allsky_RPiHQ.sh">allsky_RPiHQ.sh</option>
 
 				<?php

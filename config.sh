@@ -1,7 +1,7 @@
 #!/bin/bash
 source ~/allsky/scripts/ftp-settings.sh
 
-# Set camera type
+# Set camera to RPiHQ
 CAMERA=RPiHQ
 
 # Set to true to upload current image to your website
@@ -17,7 +17,7 @@ POST_END_OF_NIGHT_DATA=false
 TIMELAPSE=true
 
 # Timelapse frame rate (number of frames per second)
-FPS=10
+FPS=25
 
 # Set to true to generate a keogram at the end of the night (image summary of the night)
 KEOGRAM=true
@@ -41,7 +41,7 @@ AUTO_DELETE=true
 NIGHTS_TO_KEEP=14
 
 # Path to the dark frame for hot pixels subtraction. Can be jpg or png.
-DARK_FRAME="dark.jpg"
+DARK_FRAME="dark.png"
 
 # Set to 0 to disable Daytime Capture
 DAYTIME="1"
