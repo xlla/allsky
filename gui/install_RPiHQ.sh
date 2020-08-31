@@ -61,7 +61,7 @@ if [ -f '/etc/raspap/camera_options_RPiHQ.json' ] ; then
 	sudo mv /etc/raspap/camera_options_RPiHQ.json /etc/raspap/camera_options_RPiHQ.json.org
 fi
 
-sudo cp /home/pi/allsky/camera_options.json /etc/raspap/camera_options_RPiHQ.json
+sudo cp /home/pi/allsky/camera_options_RPiHQ.json.repo /etc/raspap/camera_options_RPiHQ.json
 sudo chown www-data:www-data /etc/raspap/camera_options_RPiHQ.json
 sudo chmod 644 /etc/raspap/camera_options_RPiHQ.json
 
