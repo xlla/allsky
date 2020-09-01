@@ -60,6 +60,7 @@ echo -en '\n'
 echo -en "${GREEN}* Start all sky service\n${NC}"
 systemctl daemon-reload
 systemctl enable allsky_RPiHQ.service
+./startallsky.sh
 echo -en '\n'
 
 echo -en "${GREEN}* Making sure all scripts in scripts directory are executable\n${NC}"
