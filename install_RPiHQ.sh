@@ -42,7 +42,7 @@ chmod 0644 /etc/rsyslog.d/allsky.conf
 echo -en '\n'
 
 echo -en "${GREEN}* Copy camera settings files\n${NC}"
-if ! -f 'settings.json' ] ; then
+if [ ! -f 'settings.json' ] ; then
 	cp settings_RPiHQ.json.repo settings.json
 fi
 if [ ! -f 'config.sh' ] ; then
