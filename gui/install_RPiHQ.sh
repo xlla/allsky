@@ -87,6 +87,9 @@ sudo chown www-data:www-data /var/www/html/includes/camera_settings.php
 
 sudo cp /home/pi/allsky/editor.php /var/www/html/includes
 sudo chown www-data:www-data /var/www/html/includes/editor.php
+
+sudo cp /home/pi/allsky/days.php /var/www/html/includes
+sudo chown www-data:www-data /var/www/html/includes/days.php
 echo -en '\n'
 
 cd /var/www/html
