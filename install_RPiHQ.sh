@@ -73,6 +73,8 @@ if [ ! -d '/home/pi/allsky/images' ] ; then
 fi
 echo -en '\n'
 
+./startallsky.sh
+
 echo -en '\n'
 echo -en "The Allsky Software is now installed. You should reboot the Raspberry Pi to finish the installation\n"
 echo -en '\n'
