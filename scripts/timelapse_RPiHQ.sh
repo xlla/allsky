@@ -26,7 +26,7 @@ scripts/batch-image-resize.sh $1
 echo -en "* ${GREEN}Creating symlinks to generate timelapse${NC}\n"
 mkdir ~/allsky/images/$1/small/sequence/
 # find images, make symlinks sequentially and start avconv to build mp4; upload mp4 and move directory
-find "~/allsky/images/$1/small" -name "*.$EXTENSION" -size 0 -delete
+find ~/allsky/images/$1/small -name "*.$EXTENSION" -size 0 -delete
 ls -a ~/allsky/images/$1/small/*.$EXTENSION |
 gawk 'BEGIN{ a=1 }{ printf "ln -sv %s ~/allsky/images/'$1'/small/sequence/%04d.'$EXTENSION'\n", $0, a++ }' |
 bash
