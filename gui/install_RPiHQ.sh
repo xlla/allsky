@@ -87,8 +87,14 @@ sudo chown www-data:www-data /var/www/html/includes/camera_settings.php
 
 sudo cp /home/pi/allsky/editor.php /var/www/html/includes
 sudo chown www-data:www-data /var/www/html/includes/editor.php
+echo -en '\n'
 
 cd /var/www/html
+echo -e "${GREEN}* Create softlink current to /home/pi/allsky/images${NC}"
+sudo mv images/favicon.png /home/pi/allsky/images
+sudo chown pi:pi /home/pi/allsky/images/favicon.png
+sudo rm -rf /var/www/html/images
+sudo ln -s /home/pi/allsky/images images
 echo -en '\n'
 
 echo -e "${GREEN}* Create softlink current to /home/pi/allsky${NC}"
