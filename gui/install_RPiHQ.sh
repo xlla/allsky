@@ -95,6 +95,10 @@ echo -e "${GREEN}* Create softlink current to /home/pi/allsky${NC}"
 sudo ln -s /home/pi/allsky current
 echo -en '\n'
 
+#echo -e "${GREEN}* Add www-data user to the sudo group${NC}"
+#sudo adduser www-data sudo
+#echo -en '\n'
+
 echo "The Allsky Portal is now installed"
 echo "You can now reboot the Raspberry Pi and connect to it from your laptop, computer, phone, tablet at this address: http://allsky.local"
 echo -en '\n'
