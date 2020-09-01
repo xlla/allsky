@@ -69,7 +69,7 @@ echo -en '\n'
 echo -en "${GREEN}* Create image directory if it does not exist yet\n${NC}"
 if [ ! -d '/home/pi/allsky/images' ] ; then
 	mkdir /home/pi/allsky/images
-	chown pi:pi images
+	chown pi:pi /home/pi/allsky/images
 fi
 echo -en '\n'
 
