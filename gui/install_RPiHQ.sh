@@ -49,7 +49,7 @@ usermod -a -G www-data pi
 echo -en '\n'
 
 echo -e "${GREEN}* Modify config.sh${NC}"
-sed -i '/CAMERA_SETTINGS=/c\CAMERA_SETTINGS="/etc/raspap/settings_RPiHQ.json"' /home/pi/allsky/config.sh
+sed -i '/CAMERA_SETTINGS=/c\CAMERA_SETTINGS="/etc/raspap/settings_RPiHQ.json"' ~/allsky/config.sh
 echo -en '\n'
 
 echo -e "${GREEN}* Put adjusted RPI HQ camera options & settings file in place${NC}"
