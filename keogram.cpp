@@ -108,23 +108,24 @@ int main(int argc, char *argv[])
 	cv::Mat accumulated;
 
 	int prevHour = -1;
-
-	for (size_t f = 0; f < files.gl_pathc; f++)
+cv::Mat image;
+	for (size_t f = 0; f < files.gl_pathc * 2; f++)
 	{
-		cv::Mat image = cv::imread(files.gl_pathv[f], cv::IMREAD_UNCHANGED);
+		if (!(f & 1))
+			image = cv::imread(files.gl_pathv[f / 2], cv::IMREAD_UNCHANGED);
 		if (!image.data)
 		{
-			std::cout << "Error reading file " << basename(files.gl_pathv[f]) << std::endl;
+			std::cout << "Error reading file " << basename(files.gl_pathv[f / 2]) << std::endl;
 			continue;
 		}
-
-		std::cout << "[" << f + 1 << "/" << files.gl_pathc << "] " << basename(files.gl_pathv[f]) << std::endl;
+		if (!(f & 1))
+			std::cout << "[" << (f / 2) + 1 << "/" << files.gl_pathc << "] " << basename(files.gl_pathv[f / 2]) << std::endl;
 
 		// If we don't have image yet, create one using height and format from
 		// the source image and width from number of files
 		if (accumulated.empty())
 		{
-			accumulated.create(image.rows, files.gl_pathc, image.type());
+			accumulated.create(image.rows, files.gl_pathc * 2, image.type());
 		}
 		// Copy middle column to destination
 		image.col(image.cols / 2).copyTo(accumulated.col(f));
@@ -132,7 +133,7 @@ int main(int argc, char *argv[])
 		if (labelsEnabled)
 		{
 			struct stat s;
-			stat(files.gl_pathv[f], &s);
+			stat(files.gl_pathv[f / 2], &s);
 
 			struct tm *t = localtime(&s.st_mtime);
 			if (t->tm_hour != prevHour)
