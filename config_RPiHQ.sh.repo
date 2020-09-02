@@ -29,7 +29,7 @@ UPLOAD_KEOGRAM=false
 STARTRAILS=true
 
 # Images with a brightness higher than the threshold will be skipped for startrails image generation
-BRIGHTNESS_THRESHOLD=0.1
+BRIGHTNESS_THRESHOLD=0.5
 
 # Set to true to upload the startrails after it has been generated
 UPLOAD_STARTRAILS=false

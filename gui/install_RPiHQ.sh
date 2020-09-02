@@ -78,7 +78,7 @@ sudo chown www-data:www-data /etc/raspap/settings_RPiHQ.json
 sudo chmod 664 /etc/raspap/settings_RPiHQ.json
 echo -en '\n'
 
-echo -e "${GREEN}* Replace system.php and camera_options.php files with adjusted RPI HQ camera version${NC}"
+echo -e "${GREEN}* Replace system.php, days.php, editor.php and camera_settings.php files with adjusted RPI HQ camera version${NC}"
 sudo cp /home/pi/allsky/system.php /var/www/html/includes
 sudo chown www-data:www-data /var/www/html/includes/system.php
 
