@@ -9,7 +9,14 @@ if [ `git pull | wc -c` != 20 ]; then
 	make
 	if [ -f "/etc/raspap/camara_options_RPiHQ.json" ] ; then
 		echo Copying camera options file...
-		sudo cp camera_options.json /etc/raspap/camera_options_RPiHQ.json
+		sudo cp camera_options_RPiHQ.json.repo /etc/raspap/camera_options_RPiHQ.json
+	fi
+
+	if [ -d '/var/www/html/includes' ] ; then
+		sudo cp camera_settings.php /var/www/html/includes
+		sudo cp system.php /var/www/html/includes
+		sudo cp editor.php /var/www/html/includes
+		sudo cp days.php /var/www/html/includes
 	fi
 fi
 
