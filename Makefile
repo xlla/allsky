@@ -1,8 +1,8 @@
-platform = armv7
+platform = armv8
 
 #INCLIB = /usr/local/include
 #LDLIB = /usr/local/lib
-OPENCV = $(shell pkg-config --cflags opencv) $(shell pkg-config --libs opencv)
+OPENCV = $(shell pkg-config --cflags opencv4) $(shell pkg-config --libs opencv4)
 USB =  -I libusb/ -L libusb/  
 LIBSPATH = -L../lib/$(platform) -I../include
 DEFS = -D_LIN -D_DEBUG 
@@ -20,6 +20,13 @@ ifeq ($(platform), armv7)
 CC = arm-linux-gnueabihf-g++
 AR= arm-linux-gnueabihf-ar
 CFLAGS += -march=armv7 -mthumb
+endif
+
+
+ifeq ($(platform), armv8)
+CC = aarch64-poky-linux-g++
+AR= aarch64-poky-linux-ar
+CFLAGS += -march=armv8-a+crc+simd 
 endif
 
 all:capture_RPiHQ startrails keogram sunwait-remove-precompiled sunwait

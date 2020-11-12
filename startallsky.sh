@@ -1,1 +1,1 @@
-sudo service allsky_RPiHQ start
+sudo systemctl start allsky_RPiHQ
