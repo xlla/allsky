@@ -23,7 +23,7 @@ function DisplayCameraConfig(){
 	    	foreach ($_POST as $key => $value){
 			// We look into POST data to only select camera settings
 			if (!in_array($key, ["csrf_token", "save_camera_options", "reset_camera_options"])){
-				if (camera_options_array[$key] == "checkbox"){
+				if ($camera_options_array[$key] == "checkbox"){
 					$settings[$key] = $value;
 				} else {
 					$settings[$key] = $value;

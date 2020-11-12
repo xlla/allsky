@@ -9,7 +9,7 @@ echo -e "**********************************************${NC}"
 echo -en '\n'
 
 echo -en "${GREEN}* Dependencies installation\n${NC}"
-apt-get update && apt-get install libopencv-dev libusb-dev ffmpeg gawk lftp jq imagemagick -y
+apt-get update && apt-get install libopencv-core-dev libusb-1.0-dev ffmpeg gawk lftp jq imagemagick -y
 echo -en '\n'
 
 echo -en "${GREEN}* Compile allsky software\n${NC}"
@@ -26,7 +26,7 @@ udevadm control -R
 echo -en '\n'
 
 echo -en "${GREEN}* Autostart script\n${NC}"
-sed -i '/allsky_RPiHQ.sh/d' /etc/xdg/lxsession/LXDE-pi/autostart
+#sed -i '/allsky_RPiHQ.sh/d' /etc/xdg/lxsession/LXDE-pi/autostart
 cp autostart/allsky_RPiHQ.service /lib/systemd/system/
 chown root:root /lib/systemd/system/allsky_RPiHQ.service
 chmod 0644 /lib/systemd/system/allsky_RPiHQ.service
@@ -54,7 +54,7 @@ fi
 echo -en '\n'
 
 echo -en "${GREEN}* Change ownership of all files in allsky directory to pi:pi\n${NC}"
-chown -R pi:pi /home/pi/allsky
+chown -R pi:pi /home/pi/git/allsky
 echo -en '\n'
 
 echo -en "${GREEN}* Start all sky service\n${NC}"
@@ -63,13 +63,13 @@ systemctl enable allsky_RPiHQ.service
 echo -en '\n'
 
 echo -en "${GREEN}* Making sure all scripts in scripts directory are executable\n${NC}"
-sudo chmod 755 /home/pi/allsky/scripts/*.sh
+sudo chmod 755 /home/pi/git/allsky/scripts/*.sh
 echo -en '\n'
 
 echo -en "${GREEN}* Create image directory if it does not exist yet\n${NC}"
 if [ ! -d '/home/pi/allsky/images' ] ; then
-	mkdir /home/pi/allsky/images
-	chown pi:pi /home/pi/allsky/images
+	mkdir /home/pi/git/allsky/images
+	chown pi:pi /home/pi/git/allsky/images
 fi
 echo -en '\n'
 
